@@ -28,15 +28,16 @@ zh-CN:
   tab_team: 团队
   admin_tab_groups: 分组
   admin_tab_fields: 字段
-  admin_tab_tags: 标记
-  admin_tab_tags: Tags
+  admin_tab_tags: 标签
   admin_tab_settings: 设置
   admin_tab_plugins: 插件
   affiliate: 下属
   competitor: 对手
   customer: 客户
-  partner: 合伙人
-  reseller: 供销商
+  partner: 合作伙伴
+  reseller: 中间商
+  agency: 代理商
+  agency_customer: 代理商客户
   vendor: 工厂
   planned: 计划
   started: 已开始
@@ -44,25 +45,24 @@ zh-CN:
   completed: 完成
   called_off: 取消
   new: 新建
-  contacted: 已联系
+  contacted: 无法联系
   converted: 已转换
-  rejected: 已拒绝
-  cold_call: 冷电话
-  conference: 会议
-  online: 在线营销
-  referral: 转来
-  self: 自己产生
-  web: 网站
+  rejected: 无效
+  cold_call: 电话咨询
+  conference: 展会/活动
+  online: 在线咨询
+  referral: 转介绍
+  self: 自行开发
+  web: 在线申请
   word_of_mouth: 口头
   other: 其它
-  prospecting: 展望
-  analysis: 分析
-  presentation: 演示
-  proposal: 建议
-  negotiation: 谈判
-  final_review: 最后审查
-  won: 结束／赢
-  lost: 结束／输
+  prospecting: 初步意向
+  planning: 意向明确
+  trial: 已试用
+  contract: 合同流程
+  won: 赢单
+  lost: 放弃
+
   call: 电话
   email: Email
   follow_up: 跟进
@@ -77,7 +77,7 @@ zh-CN:
   due_this_week: 本周
   due_next_week: 下周
   due_later: 以后
-  due_specific_date: 特定日期...
+  due_specific_date: 指定日期
   completed_today: 今天
   completed_yesterday: 昨天
   completed_last_week: 上周
@@ -122,7 +122,7 @@ zh-CN:
         contact:
           attributes:
             first_name:
-              missing_first_name: ^请指定用户的名
+              missing_first_name: ^请指定用户的名字
             last_name:
               missing_last_name: ^请指定用户的姓
             access:
@@ -130,7 +130,7 @@ zh-CN:
         lead:
           attributes:
             first_name:
-              missing_first_name: ^请指定用户的名
+              missing_first_name: ^请指定用户的名字
             last_name:
               missing_last_name: ^请指定用户的姓
             access:
@@ -191,7 +191,7 @@ zh-CN:
   msg_asset_not_available: 这个 %{value} 已不存在
   msg_asset_not_authorized: 没有权限查看 %{value}.
   msg_assets_not_available: 这个 %{value} 不存在
-  msg_asset_rejected: ! '%{value} 已被拒绝'
+  msg_asset_rejected: ! '%{value} 已记为无效'
   msg_bad_image_file: ^^不能将此图片上传或改变大小
   msg_cant_create_related: 不能创建 %{asset} 因为 %{related} 已不存在
 
@@ -218,7 +218,7 @@ zh-CN:
   # Options.
   #----------------------------------------------------------------------------
   option_amount*probability: weighted amount
-  activity_options: 显示 %{models} 行业由 %{user} 在过去 %{period}.
+  activity_options: 显示在过去 %{period}，%{user} 的 %{models} 项目
 
   all_users: 所有用户
   option_after: 之后
@@ -231,7 +231,7 @@ zh-CN:
   option_company: 公司
   option_created_at: 创建日期
   option_ends_on: 结束日期
-  option_first_name: 名
+  option_first_name: 名字
   option_last_name: 姓
   option_leads_count: 实际线索
   option_long: 长
@@ -267,7 +267,7 @@ zh-CN:
   contact_info: 联系人信息
   current_password: 旧密码
   edit_profile: 编辑个人设置
-  first_name: 名
+  first_name: 名字
   google: Google IM
   gravatar_help: 不熟悉 Gravatars? 了解 Gravatars
   image_file: 图片文件
@@ -347,7 +347,7 @@ zh-CN:
   budget: 预算
   budget_label: 预算(￥)
   campaign: 促销
-  campaign_and_leads: 促销与领导
+  campaign_and_leads: 促销与线索
   campaign_small: 促销
   campaign_summary: 促销摘要
   campaign_targets: 促销目标
@@ -369,7 +369,7 @@ zh-CN:
   objectives_help: 请指定目标线索数、商机转换率、目标收入、战役预算，这些数据帮助跟踪实际战役产出。
 
 
-  objectives_small: 战役目标
+  objectives_small: 促销目标
   revenue: 收入
   revenue_label: 收入(￥)
   revenue_number: 收入%{value}
@@ -457,10 +457,10 @@ zh-CN:
   leads_small: 线索
   none: 无
   rating: 星级
-  reject: 拒绝
-  reject_lead_confirm: 确认拒绝此线索？
+  reject: 无效
+  reject_lead_confirm: 确认线索无效？
   save_lead: 保存线索
-  source: 源
+  source: 来源
   status: 状态
   total_leads: 线索总计
   show_status_info_small: 显示线索的状态信息
@@ -503,7 +503,7 @@ zh-CN:
 
   # Views -> Tasks.
   #----------------------------------------------------------------------------
-  task: Task
+  task: 任务
   task_small: 任务
   tasks: 任务
   tasks_small: 任务
@@ -555,7 +555,7 @@ zh-CN:
   action_create: 已创建
   action_destroy: 已删除
   action_reassigned: 已重新分配
-  action_rejected: 已拒绝
+  action_rejected: 无效
   action_rescheduled: 已重定时间表
   action_updated: 已更新
   action_viewed: 已查看
@@ -565,15 +565,15 @@ zh-CN:
   recent_activity: 最近行为
   recent_activity_options: 最近行为选项
   subject_account: 客户
-  subject_address: address on
+  subject_address: 地址n
   subject_campaign: 促销
-  subject_comment: comment on
+  subject_comment: 备注
   subject_contact: 联系人
-  subject_email: email on
+  subject_email: Email
   subject_lead: 线索
   subject_opportunity: 商机
   subject_task: 任务
-  subject_user: user
+  subject_user: 用户
   tag_list: Tags
   create_past_participle: Record Creations
   view_past_participle: 查看
@@ -585,18 +585,18 @@ zh-CN:
   no_task_records: 暂无任务
   my_opportunities: 我的商机
   no_opportunity_records: 暂无商机
-  my_accounts: 我的账号
-  no_account_records: 暂无账号
-  not_showing_hidden_entities: 未显示隐藏的 %{count} 个 %{entity}.
+  my_accounts: 我的客户
+  no_account_records: 暂无客户
+  not_showing_hidden_entities: 隐藏的 %{count} 个 %{entity}.
 
   # Views -> Common.
   #----------------------------------------------------------------------------
-  add_note: 添加注释
-  save_note: 保存注释
-  add_note_help: 添加一个新注释...
-  edit_note: 编辑注释
-  added_ago: 添加于 %{value} 之前
-  added_by: 添加于 %{time_ago} 之前，由 %{user}
+  add_note: 添加备注
+  save_note: 保存备注
+  add_note_help: 添加备注...
+  edit_note: 编辑备注
+  added_ago: 添加于 %{value} 
+  added_by: 由 %{user}，添加于 %{time_ago}
   back: 返回
   cancel: 取消
   close_form: 关闭，由
@@ -676,11 +676,12 @@ zh-CN:
   edit_comment: 编辑评论
   show: 显示
   update: 更新
+  view: 查看
   following_users_will_be_notified: 通过邮件通知下列用户
   notifications_tooltip: 订阅者将通过邮件接收新评论
   subscribe_via_email: 通过电子邮件订阅
-  disable_email_subscriptions: Disable email subscription
-  added_note: added note %{value}
+  disable_email_subscriptions: 关闭邮件订阅
+  added_note: "%{value} 添加备注"
 
   # Views -> Emails.
   #----------------------------------------------------------------------------
@@ -735,14 +736,14 @@ zh-CN:
 
   # Views -> Versions
   #----------------------------------------------------------------------------
-  versions: History
+  versions: 历史记录
   version:
     create: ! '%{item}  %{by} 创建'
     update: ! '%{item}  %{by} 修改'
     destroy: ! '%{item} %{by} 删除'
-    set_html: ! '%{attr} set to %{to}'
-    unset_html: ! '%{attr} unset'
-    change_html: ! '%{attr} 从 %{from} 修改成 %{to}'
+    set_html: ! '%{attr} 设置为 %{to}'
+    unset_html: ! '%{attr} 取消设置'
+    change_html: ! '%{attr} 从 %{from} 改为 %{to}'
     anonymous: 匿名
   account_contact_id: 账户id
   account_contact_name: 账户姓名
@@ -802,8 +803,8 @@ zh-CN:
       one: 1 天
       other: ! '%{count} 天'
     login:
-      one: 1 个登录
-      other: ! '%{count} 个登录'
+      one: 1 次登录
+      other: ! '%{count} 次登录'
 
   # Custom date/time formats.
   #----------------------------------------------------------------------------

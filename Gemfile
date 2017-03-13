@@ -1,14 +1,7 @@
-source 'https://rubygems.org'
+# source 'https://rubygems.org'
+source 'https://gems.ruby-china.org'
 
-# Uncomment the database that you have configured in config/database.yml
-# ----------------------------------------------------------------------
-db_drivers = {
-  "mysql" => "mysql2",
-  "sqlite" => "sqlite3",
-  "postgres" => "pg"
-}
-
-gem db_drivers[ENV['CI'] && ENV['DB']] || 'pg'
+gem "mysql2"
 
 # Removes a gem dependency
 def remove(name)
@@ -44,6 +37,7 @@ group :development do
     gem 'capistrano-bundler'
     gem 'capistrano-rails'
     gem 'capistrano-rvm'
+    gem 'capistrano-unicorn-nginx'
     gem 'guard'
     gem 'guard-rspec'
     gem 'guard-rails'
@@ -76,6 +70,11 @@ end
 group :heroku do
   gem 'unicorn', platform: :ruby
   gem 'rails_12factor'
+end
+
+group :production do
+  gem 'unicorn', '~> 4.9.0'
+  gem 'lograge', '~> 0.4.1'
 end
 
 gem 'sass-rails'

@@ -28,6 +28,7 @@ class Ability
       can :manage, entities, access: 'Public'
       can :manage, entities + [Task], user_id: user.id
       can :manage, entities + [Task], assigned_to: user.id
+      cannot :destroy, entities
 
       #
       # Due to an obscure bug (see https://github.com/ryanb/cancan/issues/213)
