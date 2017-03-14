@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   get 'profile'    => 'users#show',              :as => :profile
   get 'signup'     => 'users#new',               :as => :signup
 
+  post '/api/create_lead' => "api#create_lead", constraints: ->(req){ req.remote_ip == "54.223.202.83"}
+
   get '/home/options',  as: :options
   get '/home/toggle',   as: :toggle
   match '/home/timeline', as: :timeline, via: [:get, :put, :post]
