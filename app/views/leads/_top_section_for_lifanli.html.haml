@@ -1,0 +1,31 @@
+
+= hook(:lead_top_section, self, :f => f) do
+  .section
+    %table
+      %tr
+        %td
+          .label.top{ :class => "#{Setting.require_first_names ? 'req' : nil}" } #{t :first_name}:
+          = f.text_field :first_name, :autofocus => true
+        %td= spacer
+        %td
+          .label #{t :phone}:
+          = f.text_field :phone
+      %tr
+        %td
+          .label.top #{t :company}:
+          = f.autocomplete_field :company, autocomplete_account_name_leads_path
+        %td= spacer
+
+      %tr
+        %td
+          = render "shared/address", :f => f, :asset => @lead, :type => 'business', :title => :address
+
+      - if Setting.background_info && Setting.background_info.include?(:lead)
+        %tr
+          %td(colspan="3")
+            .label= t(:background_info) << ':'
+            = f.text_area :background_info, :style =>"width:500px", :rows => 3
+
+      = render :partial => "/shared/tags", :locals => {:f => f, :span => 3}
+
+      = hook(:lead_top_section_bottom, self, :f => f)

@@ -317,12 +317,14 @@ lead_status:
   - :new
   - :contacted
   - :converted
+  - :duplicated
   - :rejected
 
 lead_status_color:
   :new       : Turquoise
   :contacted : Silver
   :converted : YellowGreen
+  :duplicated : OrangeRed
   :rejected  : OrangeRed
 
 lead_source:

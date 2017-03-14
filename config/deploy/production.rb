@@ -1,5 +1,5 @@
 set :nginx_server_name, 'lifanli.cn *.lifanli.cn'
-set :unicorn_workers, 3
+set :unicorn_workers, 2
 
 server '54.223.202.83',
   user: 'deploy',
