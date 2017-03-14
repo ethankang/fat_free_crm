@@ -58,7 +58,7 @@ class Lead < ActiveRecord::Base
   scope :created_by,   ->(user) { where(user_id: user.id) }
   scope :assigned_to,  ->(user) { where(assigned_to: user.id) }
 
-  scope :text_search, ->(query) { search('first_name_or_last_name_or_company_or_email_cont' => query).result }
+  scope :text_search, ->(query) { search('first_name_or_last_name_or_company_or_email_or_phone_cont' => query).result }
 
   uses_user_permissions
   acts_as_commentable
@@ -76,6 +76,7 @@ class Lead < ActiveRecord::Base
   validates_presence_of :last_name,  message: :missing_last_name,  if: -> { Setting.require_last_names  }
   validate :users_for_shared_access
   validates :status, inclusion: { in: proc { Setting.unroll(:lead_status).map { |s| s.last.to_s } } }, allow_blank: true
+  validates :phone, uniqueness: true, presence: true
 
   after_create :increment_leads_count
   after_destroy :decrement_leads_count
