@@ -39,7 +39,9 @@
         == #{t :referred_by_small} #{lead.referred_by}
 
     %dt
-      = stars_for(lead)
+      -#       = stars_for(lead)
+      来源:
+      = t(lead.source, :default => :n_a)
       |
       - if can?(:read, lead)
         - if lead.email.present?

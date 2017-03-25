@@ -30,7 +30,8 @@ class Comment < ActiveRecord::Base
                   ignore: [:state]
 
   before_create :subscribe_mentioned_users
-  after_create :subscribe_user_to_entity, :notify_subscribers
+  # 通知邮件总是发送失败，暂时停用
+#   after_create :subscribe_user_to_entity, :notify_subscribers
 
   def expanded?
     state == "Expanded"
