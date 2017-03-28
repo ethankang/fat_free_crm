@@ -44,11 +44,12 @@ zh-CN:
   on_hold: 搁置
   completed: 完成
   called_off: 取消
-  new: 新建
+  new: 待联系
   contacted: 无法联系
   converted: 已转换
   duplicated: 重复线索
   contact_later: 稍后联系
+  abeyance: 暂时搁置
   rejected: 无效
   cold_call: 电话咨询
   conference: 展会/活动
