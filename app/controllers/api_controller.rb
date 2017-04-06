@@ -14,7 +14,7 @@ class ApiController < ActionController::Base
         user_id: user_id
       )
     else
-      Lead.create(
+      lead = Lead.new(
         user_id: user_id,
         status: :new,
         access: "Private",
@@ -28,6 +28,14 @@ class ApiController < ActionController::Base
           city: params[:city]
         }
       )
+
+      if params[:agent_name]
+        lead.referred_by = params[:agent_name]
+        lead.status = :rejected
+        lead.source = :referral
+      end
+
+      lead.save
     end
     render nothing: true
   end

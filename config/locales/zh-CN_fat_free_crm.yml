@@ -54,7 +54,7 @@ zh-CN:
   cold_call: 电话咨询
   conference: 展会/活动
   online: 在线咨询
-  referral: 转介绍
+  referral: 代理商
   self: 自行开发
   web: 在线申请
   word_of_mouth: 口头
@@ -413,8 +413,8 @@ zh-CN:
 
   permissions_intro_shared: 默认只有选定用户对 %{value} 有权限。以后可修改。
 
-  referred_by: 引用
-  referred_by_small: 引用
+  referred_by: 代理商
+  referred_by_small: 代理商
   save_contact: 保存联系人
   twitter: Twitter
   unassigned: 未分配
