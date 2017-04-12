@@ -315,7 +315,7 @@ campaign_status_color:
 #------------------------------------------------------------------------------
 lead_status:
   - :new
-  - :contacted
+#   - :contacted
   - :converted
   - :duplicated
   - :contact_later

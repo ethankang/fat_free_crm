@@ -497,7 +497,7 @@ module ApplicationHelper
   # Generate the html for $.timeago function
   # <span class="timeago" datetime="2008-07-17T09:24:17Z">July 17, 2008</span>
   def timeago(time, options = {})
-    options[:class] ||= "timeago"
+#     options[:class] ||= "timeago"
     content_tag(:span, h(time.to_s), options.merge(title: time.getutc.iso8601)) if time
   end
 
