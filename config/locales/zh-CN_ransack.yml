@@ -5,21 +5,22 @@ zh-CN:
     predicate: predicate
     and: 和
     or: 或
-    any: 任何
-    all: 所有
+    any: 任何一条
+    all: 全部同时
     combinator: 组合器
     attribute: 属性
     value: 值
     condition: 条件
+    sort_by: 排序
     sort: 排序
     asc: 升序
     desc: 降序
     submit: 搜索
-    add_group: 增加过滤器组
-    group_first: Show results where %{combinator} of the following match
-    group_rest: ! '...and where %{combinator} of the following match'
-    add_condition: 增加一个过滤器
-    remove_condition: 移除过滤器
+    add_group: 增加一组搜索条件
+    group_first: 搜索条件需 %{combinator} 满足
+    group_rest: ! '搜索条件需 %{combinator} 满足'
+    add_condition: 增加搜索条件
+    remove_condition: 移除搜索条件
     predicates:
       eq: 等于
       eq_any: 等于任何
@@ -71,7 +72,7 @@ zh-CN:
       not_end_all: 不结束于所有
       'true': 为 true
       'false': 为 false
-      present: is present
+      present: 存在
       blank: 为空
       'null': 为 null
       not_null: 不为 null
@@ -89,3 +90,9 @@ zh-CN:
           gteq: is after or on
           gteq_any: is after or on any
           gteq_all: is after or on all
+    models:
+      lead: 线索
+    attributes:
+      lead:
+        id: ID
+        user_id: 用户

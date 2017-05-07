@@ -347,15 +347,13 @@ opportunity_default_stage: :prospecting
 opportunity_stage:
   - :prospecting
   - :planning
-  - :trial
   - :contract
   - :won
   - :lost
 
 opportunity_stage_color:
-  :prospecting  : Silver
-  :planning     : LightBlue
-  :trial        : Aqua
+  :prospecting  : LightSkyBlue
+  :planning     : Aqua
   :contract     : DeepSkyBlue
   :won          : YellowGreen
   :lost         : OrangeRed

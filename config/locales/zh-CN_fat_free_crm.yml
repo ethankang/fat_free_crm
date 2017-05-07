@@ -33,11 +33,11 @@ zh-CN:
   admin_tab_plugins: 插件
   affiliate: 下属
   competitor: 对手
-  customer: 客户
+  customer: 直客
   partner: 合作伙伴
   reseller: 中间商
   agency: 代理商
-  agency_customer: 代理商客户
+  agency_customer: 代理商的客户
   vendor: 工厂
   planned: 计划
   started: 已开始
@@ -59,12 +59,11 @@ zh-CN:
   web: 在线申请
   word_of_mouth: 口头
   other: 其它
-  prospecting: 待开发
-  planning: 意向明确
-  trial: 已试用
+  prospecting: 潜在机会
+  planning: 明确意向
   contract: 合同流程
   won: 赢单
-  lost: 放弃
+  lost: 丢单
 
   call: 电话
   email: Email
@@ -240,15 +239,15 @@ zh-CN:
   option_long: 长
   option_name: 名字
   option_probability: 可能性
-  option_rating: 比率
+  option_rating: 星级
   option_revenue: 实际收入
   option_starts_on: 开始日期
   option_target_leads: 目标线索
   option_target_revenue: 目标收入
   option_updated_at: 更新日期
   show_per_page: 显示 %{number} %{models} 每页使用 %{fmt} 格式
-  sort_by: 用 %{field}
-  sort_by_displaying: 用 %{field} 排序 %{models}，显示名 %{position} 姓
+  sort_by: 按 %{field} 排序
+  sort_by_displaying: 按 %{field} 排序 %{models}，显示名 %{position} 姓
 
   entities_per_page: ! '%{entity} 每页:'
   contacts_index_long: 长格式
@@ -440,7 +439,7 @@ zh-CN:
 
 
   create_lead: 创建线索
-  create_opp_for_contact: 可以为 %{value} 联系人创建一个商机，需指定名称、当前阶段、预计结束日期、销售可能性、线索数量、折扣。
+  create_opp_for_contact: 可以为 %{value} 创建一个商机，需指定名称、当前阶段、预计结束日期、销售可能性、线索数量、折扣。
 
 
   lead: 线索
@@ -612,7 +611,7 @@ zh-CN:
   create_a_new: 创建一个新
   select_existing: 选择已有
   delete: 删除
-  Discard: 放弃
+  discard: 丢弃
   edit: 编辑
   items_total: ! '%{count} 总计'
   less: 较少...
@@ -665,6 +664,8 @@ zh-CN:
   quick_find: 快速查找
   welcome: 欢迎
 
+  # Base search
+  search: 搜索
   # Advanced search
   accounts_advanced_search: 账户高级搜索
   advanced_search: 高级搜索

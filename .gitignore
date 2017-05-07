@@ -35,3 +35,4 @@ Design
 *.gem
 
 .passenger
+.vim_session

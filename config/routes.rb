@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get 'profile'    => 'users#show',              :as => :profile
   get 'signup'     => 'users#new',               :as => :signup
 
+  # 限制只有通过立返利服务器发出的请求才予以处理
   post '/api/create_lead' => "api#create_lead", constraints: ->(req){ req.remote_ip == "54.223.202.83"}
 
   get '/home/options',  as: :options

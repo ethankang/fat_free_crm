@@ -17,6 +17,17 @@
             %td
               .label.req #{t :assigned_to}:
               = user_select(:account, all_users, current_user)
+          %tr
+            %td
+              .label #{t :category}:
+              = select_tag("account[category]",
+                options_for_select(Setting.unroll(:account_category)),
+                { :selected => (@account.category || "other").to_sym,
+                :include_blank => t(:other), :style => "width:160px" })
+            %td= spacer
+            %td
+              .label #{t :rating}:
+              = rating_select "account[rating]", { :id => :account_rating, :selected => @account.rating, :style => "width:160px" }
     = render "leads/opportunity"
     = render "leads/convert_permissions"
     .buttonbar
