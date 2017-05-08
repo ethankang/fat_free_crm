@@ -15,7 +15,7 @@
       %li= link_to_delete(account)
 
   .indent
-    = link_to(account.name, account)
+    = link_to("#{account.name} (#{account.contacts.first.try(:first_name)})", account)
     - if amount != 0.0
       %span.amount= number_to_currency(amount, :precision => 0)
     &ndash;
