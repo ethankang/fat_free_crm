@@ -5,10 +5,10 @@
         = link_to(tab[:url], :class => tab[:active] ? "active" : nil) do
           %i.fa{class: tab[:icon]}
           = t(tab[:text])
-    %li
-      = link_to("/wiki", target: :blank) do
-        %i.fa{class: "fa-book"}
-        知识库
+-#     %li
+-#       = link_to("/wiki", target: :blank) do
+-#         %i.fa{class: "fa-book"}
+-#         知识库
 
 = show_flash
 %table{ :width => "100%", :height => "100%", :cellpadding => 0, :cellspacing => 0, :class => :tabbed }
