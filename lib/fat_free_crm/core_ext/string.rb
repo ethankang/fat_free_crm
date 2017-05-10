@@ -18,9 +18,9 @@ class String
     gsub(/[^\d]/, "")  # "$100,000".digitize # => 100000
   end
 
-  def to_url
-    match(/^https?:\/\//) ? self : "http://" << self
-  end
+#   def to_url
+#     match(/^https?:\/\//) ? self : "http://" << self
+#   end
 
   def true?
     self == "true"

@@ -3,7 +3,39 @@
 # Fat Free CRM is freely distributable under the terms of MIT license.
 # See MIT-LICENSE file or http://www.opensource.org/licenses/mit-license.php
 #------------------------------------------------------------------------------
+require 'gollum/app'
+
+class App < Precious::App
+
+  before { authenticate }
+
+  helpers do
+    def authenticate
+      request.session[:init] = true
+      user = User.find_by_id(request.session[:user_credentials_id])
+      if user
+        session["gollum.author"] = { :name => user.name, :email => user.email }
+      else
+        response["Location"] = "http://#{Setting.host}"
+        throw(:halt, [302, "Found"])
+      end
+    end
+  end
+
+end
+
 Rails.application.routes.draw do
+
+  App.set(:gollum_path, Rails.root.join("db", "wiki"))
+  App.set(:default_markup, :markdown) # set your favorite markup language
+  App.set(:wiki_options, {
+    live_preview: false,
+    allow_uploads: true,
+    show_all: true,
+    template_dir: Rails.root.join('app/views/wiki_template').to_s
+  })
+  mount App, at: 'wiki'
+
   resources :lists
 
   root to: 'home#index'
