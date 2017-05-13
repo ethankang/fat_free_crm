@@ -286,7 +286,7 @@ account_category:
 
 account_category_color:
   :agency_customer  : paleturquoise
-  :customer    : pink
+  :customer    : YellowGreen
   :partner     : bisque
   :reseller    : thistle
   :agency      : skyblue

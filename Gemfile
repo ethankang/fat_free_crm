@@ -84,3 +84,4 @@ gem 'execjs'
 gem 'therubyracer', platform: :ruby unless ENV["CI"]
 gem 'nokogiri', '>= 1.6.8'
 gem 'gollum', '~> 4.1', '>= 4.1.1'
+gem 'gollum-rugged_adapter', '~> 0.4.4'

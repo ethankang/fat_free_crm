@@ -3,6 +3,9 @@
 # Fat Free CRM is freely distributable under the terms of MIT license.
 # See MIT-LICENSE file or http://www.opensource.org/licenses/mit-license.php
 #------------------------------------------------------------------------------
+module Gollum
+  Gollum::GIT_ADAPTER = "rugged"
+end
 require 'gollum/app'
 
 class App < Precious::App
@@ -26,7 +29,7 @@ end
 
 Rails.application.routes.draw do
 
-  App.set(:gollum_path, Rails.root.join("db", "wiki"))
+  App.set(:gollum_path, Rails.root.join("db", "wiki").to_s)
   App.set(:default_markup, :markdown) # set your favorite markup language
   App.set(:wiki_options, {
     live_preview: false,
