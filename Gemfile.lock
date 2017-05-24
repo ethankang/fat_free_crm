@@ -132,6 +132,7 @@ GEM
     formatador (0.2.5)
     gemojione (3.2.0)
       json
+    github-markdown (0.6.9)
     github-markup (1.6.0)
     gitlab-grit (2.8.1)
       charlock_holmes (~> 0.6)
@@ -453,6 +454,7 @@ DEPENDENCIES
   factory_girl_rails (~> 4.7.0)
   ffaker (>= 2)
   font-awesome-rails
+  github-markdown (~> 0.6.9)
   gollum (~> 4.1, >= 4.1.1)
   gollum-rugged_adapter (~> 0.4.4)
   guard
