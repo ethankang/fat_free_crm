@@ -1,16 +1,16 @@
 set :nginx_server_name, 'lifanli.cn *.lifanli.cn'
 set :unicorn_workers, 2
 
-server '54.223.202.83',
+set :ssh_options, {
   user: 'deploy',
-  roles: %w{web app db},
-  ssh_options: {
-    user: 'deploy', # overrides user setting above
-    keys: %w(~/.ssh/id_rsa),
-    forward_agent: true,
-    auth_methods: %w(publickey)
-    # password: 'please use keys'
-  }
+  keys: %w(~/.ssh/id_rsa),
+  forward_agent: true,
+  auth_methods: %w(publickey)
+}
+
+server '54.223.202.83', roles: %w{web app db}
+server '52.80.13.91', roles: %w{web app}
+
 
 
 
