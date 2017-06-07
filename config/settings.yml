@@ -371,7 +371,7 @@ task_category:
 #   - :trip
 
 task_category_color:
-  :call         : Silver
+  :call         : YellowGreen
   :email        : Turquoise
   :follow_up    : Gold
   :lunch        : Tomato

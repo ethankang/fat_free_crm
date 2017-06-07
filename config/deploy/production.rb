@@ -9,7 +9,6 @@ set :ssh_options, {
 }
 
 server '54.223.202.83', roles: %w{web app db}
-server '52.80.13.91', roles: %w{web app}
 
 
 
