@@ -85,6 +85,7 @@ class Task < ActiveRecord::Base
   scope :overdue,       -> { where('due_at IS NOT NULL AND due_at < ?', Time.zone.now.midnight.utc).order('tasks.id DESC') }
   scope :due_today,     -> { where('due_at >= ? AND due_at < ?', Time.zone.now.midnight.utc, Time.zone.now.midnight.tomorrow.utc).order('tasks.id DESC') }
   scope :due_tomorrow,  -> { where('due_at >= ? AND due_at < ?', Time.zone.now.midnight.tomorrow.utc, Time.zone.now.midnight.tomorrow.utc + 1.day).order('tasks.id DESC') }
+  scope :due_day_after_tomorrow,  -> { where('due_at >= ? AND due_at < ?', Time.zone.now.midnight.utc + 2.day, Time.zone.now.midnight.utc + 3.day).order('tasks.id DESC') }
   scope :due_this_week, -> { where('due_at >= ? AND due_at < ?', Time.zone.now.midnight.tomorrow.utc + 1.day, Time.zone.now.next_week.utc).order('tasks.id DESC') }
   scope :due_next_week, -> { where('due_at >= ? AND due_at < ?', Time.zone.now.next_week.utc, Time.zone.now.next_week.end_of_week.utc + 1.day).order('tasks.id DESC') }
   scope :due_later,     -> { where("(due_at IS NULL AND bucket = 'due_later') OR due_at >= ?", Time.zone.now.next_week.end_of_week.utc + 1.day).order('tasks.id DESC') }
@@ -158,7 +159,9 @@ class Task < ActiveRecord::Base
       "due_today"
     when due_tomorrow?
       "due_tomorrow"
-    when due_this_week? && !due_today? && !due_tomorrow?
+    when due_day_after_tomorrow?
+      "due_day_after_tomorrow"
+    when due_this_week? && !due_today? && !due_tomorrow? && !due_day_after_tomorrow?
       "due_this_week"
     when due_next_week?
       "due_next_week"
@@ -213,6 +216,8 @@ class Task < ActiveRecord::Base
       Time.zone.now.midnight
     when "due_tomorrow"
       Time.zone.now.midnight.tomorrow
+    when "due_day_after_tomorrow"
+      Time.zone.now.midnight + 2.days
     when "due_this_week"
       Time.zone.now.end_of_week
     when "due_next_week"
@@ -247,6 +252,11 @@ class Task < ActiveRecord::Base
   #----------------------------------------------------------------------------
   def due_tomorrow?
     due_at.between?(Time.zone.now.midnight.tomorrow, Time.zone.now.tomorrow.end_of_day)
+  end
+
+  #----------------------------------------------------------------------------
+  def due_day_after_tomorrow?
+    due_at.between?(Time.zone.now.midnight + 2.days, Time.zone.now.end_of_day + 2.days)
   end
 
   #----------------------------------------------------------------------------

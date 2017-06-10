@@ -363,10 +363,10 @@ opportunity_stage_color:
 task_category:
   - :follow_up
   - :call
-  - :email
+#   - :email
 #   - :lunch
 #   - :meeting
-#   - :money
+  - :money
 #   - :presentation
 #   - :trip
 
@@ -385,6 +385,7 @@ task_bucket:
   - :due_asap
   - :due_today
   - :due_tomorrow
+  - :due_day_after_tomorrow
   - :due_this_week
   - :due_next_week
   - :due_later

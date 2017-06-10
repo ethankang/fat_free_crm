@@ -70,12 +70,13 @@ zh-CN:
   follow_up: 跟进
   lunch: 午餐
   meeting: 会议
-  money: 钱
+  money: 催款
   trip: 旅行
   overdue: 逾期
   due_asap: 尽快
   due_today: 今天
   due_tomorrow: 明天
+  due_day_after_tomorrow: 后天
   due_this_week: 本周
   due_next_week: 下周
   due_later: 以后
