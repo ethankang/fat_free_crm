@@ -65,14 +65,16 @@
 # Settings for outgoing email (SMTP)
 # Uncomment to set up for your specific mailer
 #------------------------------------------------------------------------------
-#:smtp:
-  #:address                    : ""        # e.g. smtp.gmail.com
-  #:from                       : ""        # e.g. no-reply@your-domain.com
-  #:enable_starttls_auto       : true
-  #:port                       : "587"
-  #:authentication             : :plain
-  #:user_name                  : ""
-  #:password                   : ""
+:smtp:
+  :address                    : "smtp.mxhichina.com"        # e.g. smtp.gmail.com
+  :from                       : "no-reply@lifanli.cn"        # e.g. no-reply@your-domain.com
+  :enable_starttls_auto       : true
+  :domain                     : "lifanli.cn"
+  :port                       : "465"
+  :authentication             : :plain
+  :user_name                  : "no-reply@lifanli.cn"
+  :password                   : "no-reply@lifanli.cn"
+  :ssl                        : true
 
 # Settings for the Email dropbox (IMAP)
 # - Connection settings for the IMAP account, server and folders.

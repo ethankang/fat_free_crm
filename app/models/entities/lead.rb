@@ -78,7 +78,7 @@ class Lead < ActiveRecord::Base
   validates :status, inclusion: { in: proc { Setting.unroll(:lead_status).map { |s| s.last.to_s } } }, allow_blank: true
   validates :phone, uniqueness: true, presence: true
 
-  after_create :increment_leads_count
+  after_create :increment_leads_count, :notify_admins
   after_destroy :decrement_leads_count
 
   # Default values provided through class methods.
@@ -187,6 +187,10 @@ class Lead < ActiveRecord::Base
   #----------------------------------------------------------------------------
   def users_for_shared_access
     errors.add(:access, :share_lead) if self[:access] == "Shared" && !permissions.any?
+  end
+
+  def notify_admins
+    UserMailer.new_lead_notification(self).deliver_now
   end
 
   ActiveSupport.run_load_hooks(:fat_free_crm_lead, self)

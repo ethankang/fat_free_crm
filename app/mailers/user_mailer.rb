@@ -23,6 +23,14 @@ class UserMailer < ActionMailer::Base
          from: from_address
   end
 
+  def new_lead_notification(lead)
+    @lead = lead
+    admin_emails = User.where(admin: true).pluck(:email)
+    mail subject: "新线索：#{@lead.first_name}-#{@lead.phone}-#{@lead.company}",
+         to: admin_emails,
+         from: from_address
+  end
+
   private
 
   def from_address
