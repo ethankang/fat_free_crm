@@ -1,0 +1,11 @@
+<h1>新线索</h1>
+
+<blockquote>
+  <p>
+  姓名：<%= @lead.first_name %><br />
+  电话：<%= @lead.phone %><br />
+  公司：<%= @lead.company %><br />
+  来源：<%= t @lead.source %><br />
+  详情：<%= url_for @lead %><br />
+  </p>
+</blockquote>
