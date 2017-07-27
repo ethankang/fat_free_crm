@@ -18,15 +18,14 @@
           = t(:task_completed_ago, distance_of_time_in_words(related.completed_at, Time.now))
       - elsif related.bucket == "due_asap"
         %span.urgent
-        == #{t :due_now}.
+          %i.fa{class: "fa-warning"} #{t :task_due_now}.
       - elsif related.bucket == "due_later"
-        == #{t :due_later}.
-      - elsif related.due_at < Date.today
-        %span.warn= distance_of_time_in_words(related.due_at, Date.today)
-        == #{t :overdue} #{related.due_at.strftime('%b %e')}
-      - elsif related.due_at > Date.today
-        = t(:task_due_in, distance_of_time_in_words(Time.now, related.due_at.end_of_day))
+        == #{t :task_due_later}
+      - elsif related.due_at.to_date < Date.today
+        %span.warn #{t :overdue} #{related.due_at.to_date}
+      - elsif related.due_at.to_date > Date.today
+        = t(:task_due_in, related.due_at.to_date)
       - else
         %span.cool
-        == #{t :due_today}.
+        == #{t :task_due_today}
 

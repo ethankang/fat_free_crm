@@ -22,7 +22,8 @@
       &ndash;
     %tt
       - if pending.bucket == "due_asap"
-        %span.urgent= t(:task_due_now)
+        %span.urgent
+          %i.fa{class: "fa-warning"} #{t :task_due_now}.
 
       - elsif pending.bucket == "due_later"
         = t(:task_due_later)
@@ -30,20 +31,15 @@
       - else
         - if pending.at_specific_time?
           - if pending.due_at < Time.now
-            %span.warn= distance_of_time_in_words(pending.due_at, Time.now)
-            = t(:task_overdue)
-            = l(pending.due_at.localtime, :format => :mmddhhss)
+            %span.warn #{t :overdue} #{pending.due_at.to_date}
           - else
-            = t(:task_due_in, distance_of_time_in_words(Time.now, pending.due_at.localtime))
-            = '(' << l(pending.due_at.localtime, :format => :mmddhhss) << ')'
+            = t(:task_due_in, pending.due_at.to_date)
 
         - else
-          - if pending.due_at < Date.today
-            %span.warn= distance_of_time_in_words(pending.due_at, Time.now)
-            = t(:task_overdue)
-            = l(pending.due_at.localtime.to_date, :format => :mmdd)
-          - elsif pending.due_at > Date.today
-            = t(:task_due_in, distance_of_time_in_words(Time.now, pending.due_at.localtime.end_of_day))
+          - if pending.due_at.to_date < Date.today
+            %span.warn #{t :overdue} #{pending.due_at.to_date}
+          - elsif pending.due_at.to_date > Date.today
+            = t(:task_due_in, pending.due_at.to_date)
           - else
             %span.cool= t(:task_due_today)
 

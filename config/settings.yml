@@ -384,13 +384,13 @@ task_category_color:
 
 task_bucket:
   - :overdue
-#   - :due_asap
+  - :due_asap
   - :due_today
   - :due_tomorrow
   - :due_day_after_tomorrow
-#   - :due_this_week
-#   - :due_next_week
-#   - :due_later
+  - :due_this_week
+  - :due_next_week
+  - :due_later
 
 task_completed:
   - :completed_today

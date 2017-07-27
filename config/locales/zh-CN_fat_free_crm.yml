@@ -73,7 +73,7 @@ zh-CN:
   money: 催款
   trip: 旅行
   overdue: 逾期
-  due_asap: 尽快
+  due_asap: 尽快处理
   due_today: 今天
   due_tomorrow: 明天
   due_day_after_tomorrow: 后天
@@ -536,12 +536,12 @@ zh-CN:
   task_completed_ago: 完成于 %{value} 以前
   task_completed_by: 由 %{user} 完成于 %{time_ago} 以前
   task_created: 任务已被创建
-  task_due_in: 期限是 %{value}
-  task_due_later: 很快到期
-  task_due_now: 现在到期
+  task_due_in: 期限 %{value}
+  task_due_later: 以后处理
+  task_due_now: 尽快处理
   task_due_today: 今天到期
   task_from: 从 %{value}
-  task_overdue: 晚了，应到期于
+  task_overdue: 逾期
   task_pending: 已被移动到进行中任务
   total_tasks: 总计 %{value}
   view_assigned_tasks: 查看已分配任务
