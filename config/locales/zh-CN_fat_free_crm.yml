@@ -22,7 +22,7 @@ zh-CN:
   tab_tasks: 任务
   tab_campaigns: 促销
   tab_leads: 线索
-  tab_accounts: 客户
+  tab_accounts: 公司
   tab_contacts: 联系人
   tab_opportunities: 商机
   tab_team: 团队
@@ -310,18 +310,18 @@ zh-CN:
 
   # Views -> Accounts.
   #----------------------------------------------------------------------------
-  account: 客户
-  account_id: 客户
-  select_an_account: 选择客户
-  account_small: 客户
-  account_summary: 客户摘要
-  account_categories: 客户类别
-  accounts: 客户
-  accounts_options: 客户选项
-  accounts_small: 短客户
+  account: 公司
+  account_id: 公司
+  select_an_account: 选择公司
+  account_small: 公司
+  account_summary: 公司摘要
+  account_categories: 公司类别
+  accounts: 公司
+  accounts_options: 公司选项
+  accounts_small: 短公司
   assigned_to: 授予
   billing_address: 账单地址
-  create_account: 创建客户
+  create_account: 创建公司
   date_created: 创建日期
   date_updated: 更新日期
   fax: 传真
@@ -335,10 +335,10 @@ zh-CN:
   phone_toll_free: 免费电话
   pipeline: 渠道
   same_as_billing: 与账单相同　
-  save_account: 保存客户
+  save_account: 保存公司
   share_with: 与他人分享
   shipping_address: 送货地址
-  total_accounts: 客户总计
+  total_accounts: 公司总计
   website: 网站
   account_with_title_department: ! '%{title}, %{department} at %{account}'
   account_with_title: ! '%{title} 在 %{account}'
@@ -567,8 +567,8 @@ zh-CN:
   no_activity_records: 没有行为记录
   recent_activity: 最近行为
   recent_activity_options: 最近行为选项
-  subject_account: 客户
-  subject_accountcontact: 客户联系人
+  subject_account: 公司
+  subject_accountcontact: 公司联系人
   subject_address: 地址
   subject_campaign: 促销
   subject_comment: 备注
@@ -589,8 +589,8 @@ zh-CN:
   no_task_records: 暂无任务
   my_opportunities: 我的商机
   no_opportunity_records: 暂无商机
-  my_accounts: 我的客户
-  no_account_records: 暂无客户
+  my_accounts: 我的公司
+  no_account_records: 暂无公司
   not_showing_hidden_entities: 隐藏的 %{count} 个 %{entity}.
 
   # Views -> Common.
@@ -808,6 +808,9 @@ zh-CN:
     task:
       one: 1 个任务
       other: ! '%{count} 个任务'
+    pending_task:
+      one: 1 个未完成任务
+      other: ! '%{count} 个未完成任务'
     day:
       one: 1 天
       other: ! '%{count} 天'
