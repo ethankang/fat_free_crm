@@ -65,6 +65,7 @@ class Opportunity < ActiveRecord::Base
 
   scope :by_closes_on, -> { order(:closes_on) }
   scope :by_amount,    -> { order('opportunities.amount DESC') }
+  scope :amount_sum,    -> { sum(:amount) }
 
   uses_user_permissions
   acts_as_commentable

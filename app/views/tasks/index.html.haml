@@ -6,7 +6,8 @@
     = t(:completed_tasks)
     = image_tag("loading.gif", :size => :thumb, :id => "loading", :style => "display: none;")
 - else
-  - buckets = Setting.unroll(:task_bucket)
+  -# buckets = Setting.unroll(:task_bucket)
+  - buckets = [ "due_asap", "due_today", "due_tomorrow", "due_day_after_tomorrow", "due_this_week", "due_next_week", "due_later" ]
   = render "title"
 
 .log#tasks
