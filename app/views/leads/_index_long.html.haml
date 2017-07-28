@@ -59,9 +59,10 @@
       = t(:added_ago, value: timeago(lead.created_at)).html_safe
       | 负责人：
       = lead.assignee.try :first_name
-      - if !lead.tasks.empty?
+      - if lead.status == "contact_later" && !lead.tasks.pending.exists?
         |
-        = t('pluralize.task', lead.tasks.count)
+        %span.urgent
+          %i.fa{class: "fa-warning"} #{t :no_task}.
 
     - if lead.tag_list.present?
       %dt

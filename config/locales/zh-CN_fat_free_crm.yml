@@ -510,6 +510,7 @@ zh-CN:
   task_small: 任务
   tasks: 任务
   tasks_small: 任务
+  no_task: 无任务
   assign_to: 分配给
   assigned_tab: 已分配
   assigned_tasks: 已分配任务

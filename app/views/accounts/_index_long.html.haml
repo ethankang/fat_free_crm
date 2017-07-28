@@ -30,9 +30,12 @@
         = t(:added_ago, :value => timeago(account.created_at)).html_safe
       -# = t('pluralize.contact', account.contacts.count) << " | "
       -# = t('pluralize.opportunity', account.opportunities.count) << " | "
-      - if account.tasks.pending.count > 0
+      - if !account.tasks.pending.exists?
         |
-        %i.fa{class: "fa-warning"}
+        %span.urgent
+          %i.fa{class: "fa-warning"} #{t :no_task}.
+      - else
+        |
         = t('pluralize.pending_task', account.tasks.pending.count)
 
     %dt
