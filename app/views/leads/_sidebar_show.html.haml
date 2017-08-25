@@ -51,6 +51,13 @@
       - else
         #{t :n_a}
     %tt #{t :contact}:
+  %li
+    %dt
+      - if account = @lead.contact.try(:account)
+        = link_to(truncate(account.name, :length => 16), account_path(account), :title => account.name)
+      - else
+        #{t :n_a}
+    %tt #{t :account}:
 
   - unless @lead.background_info.blank?
     .caption #{t :background_info}
