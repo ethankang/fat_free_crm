@@ -144,7 +144,8 @@ class ApplicationController < ActionController::Base
   def require_no_user
     if current_user
       store_location
-      flash[:notice] = t(:msg_logout_needed)
+      # 当再次进入new_by_dingtalk，不显示flash
+      flash[:notice] = t(:msg_logout_needed) if action_name != "new_by_dingtalk"
       redirect_to profile_url
     end
   end
