@@ -29,7 +29,8 @@ set :rails_env, 'production'
 set :linked_files, fetch(:linked_files, []).push(
   'config/database.yml',
   'config/secrets.yml',
-  'config/settings.yml'
+  'config/settings.yml',
+  'config/apis.yml'
 )
 
 
