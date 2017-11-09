@@ -46,6 +46,8 @@ Rails.application.routes.draw do
   get 'activities' => 'home#index'
   get 'admin'      => 'admin/users#index',       :as => :admin
   get 'login'      => 'authentications#new',     :as => :login
+  get 'login_by_dingtalk'      => 'authentications#new_by_dingtalk',     :as => :login_by_dingtalk
+  post 'create_by_dingtalk'      => 'authentications#create_by_dingtalk',     :as => :create_by_dingtalk
   delete 'logout'  => 'authentications#destroy', :as => :logout
   get 'profile'    => 'users#show',              :as => :profile
   get 'signup'     => 'users#new',               :as => :signup

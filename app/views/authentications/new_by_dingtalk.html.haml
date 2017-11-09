@@ -1,0 +1,34 @@
+!!!5
+%html
+  %head
+    %meta{ "http-equiv" => "Content-Type", :content => "text/html; charset=utf-8" }
+    %title 立返利CRM
+    = javascript_include_tag :application
+    = csrf_meta_tag
+    = javascript_include_tag "http://g.alicdn.com/dingding/open-develop/1.6.9/dingtalk.js"
+
+    - api_list = %w(runtime.info runtime.permission.requestAuthCode)
+    - dingtalk_config_js api: api_list
+
+    :javascript
+      dd.ready(function() {
+        dd.runtime.permission.requestAuthCode({
+            corpId: "#{Dingtalk.cropid}",
+            onSuccess: function(result) {
+              $.ajax({
+                url: "create_by_dingtalk",
+                method: 'POST',
+                data: {code: result['code']},
+                dataType: "script"
+              })
+            },
+            onFail : function(err) {
+              $.ajax({
+                url: "create_by_dingtalk",
+                method: 'POST',
+                data: {err: err},
+                dataType: "script"
+              })
+            }
+        });
+      });
