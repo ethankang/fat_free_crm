@@ -3,7 +3,7 @@ module Dingtalk
     extend ActiveSupport::Concern
 
     module ClassMethods
-      attr_accessor :dingtalk_api_client, :token, :cropid, :agentid, :timeout, :trusted_domain_fullname
+      attr_accessor :dingtalk_api_client, :token, :corpid, :agentid, :timeout, :trusted_domain_fullname
     end
 
     def dingtalk

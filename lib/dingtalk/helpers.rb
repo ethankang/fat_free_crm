@@ -6,7 +6,7 @@ module Dingtalk
       config_js = <<-DINGTALK_CONFIG_JS
 dd.config({
   agentId: "#{Dingtalk.agentid}",
-  corpId: "#{Dingtalk.cropid}",
+  corpId: "#{Dingtalk.corpid}",
   timeStamp: "#{js_hash[:timestamp]}",
   nonceStr: "#{js_hash[:noncestr]}",
   signature: "#{js_hash[:signature]}",

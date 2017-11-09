@@ -1,10 +1,10 @@
 module Dingtalk
   class AccessToken
 
-    def initialize(client, cropid, cropsecret)
+    def initialize(client, corpid, corpsecret)
       @client = client
-      @cropid = cropid
-      @cropsecret = cropsecret
+      @corpid = corpid
+      @corpsecret = corpsecret
     end
 
     def token
@@ -12,7 +12,7 @@ module Dingtalk
     end
 
     def refresh
-      data = @client.get('gettoken', params: { corpid: @cropid, cropsecret: @cropsecret })
+      data = @client.get('gettoken', params: { corpid: @corpid, corpsecret: @corpsecret })
 
       if !data["access_token"].blank?
         Rails.cache.write(

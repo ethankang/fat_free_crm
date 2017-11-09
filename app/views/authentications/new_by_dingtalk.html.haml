@@ -13,7 +13,7 @@
     :javascript
       dd.ready(function() {
         dd.runtime.permission.requestAuthCode({
-            corpId: "#{Dingtalk.cropid}",
+            corpId: "#{Dingtalk.corpid}",
             onSuccess: function(result) {
               $.ajax({
                 url: "create_by_dingtalk",

@@ -1,5 +1,5 @@
 Dingtalk.config do |config|
-  config.cropid = Rails.configuration.apis["dingtalk"]["cropid"]
-  config.cropsecret = Rails.configuration.apis["dingtalk"]["cropsecret"]
+  config.corpid = Rails.configuration.apis["dingtalk"]["corpid"]
+  config.corpsecret = Rails.configuration.apis["dingtalk"]["corpsecret"]
   config.agentid = Rails.configuration.apis["dingtalk"]["agentid"]
 end
