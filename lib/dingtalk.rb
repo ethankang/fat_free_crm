@@ -6,7 +6,7 @@ module Dingtalk
   EXPIRE_OFFSET = 5.minutes
 
   # configurations
-  mattr_accessor :cropid, :cropsecret, :agentid
+  mattr_accessor :corpid, :corpsecret, :agentid
 
   class AccessTokenExpiredError < StandardError; end
   class ResponseError < StandardError
