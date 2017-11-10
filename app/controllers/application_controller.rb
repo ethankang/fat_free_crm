@@ -146,7 +146,7 @@ class ApplicationController < ActionController::Base
       store_location
       # 当再次进入new_by_dingtalk，不显示flash
       flash[:notice] = t(:msg_logout_needed) if action_name != "new_by_dingtalk"
-      redirect_to profile_url
+      redirect_to root_url
     end
   end
 
