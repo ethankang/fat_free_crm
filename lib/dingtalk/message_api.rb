@@ -7,12 +7,15 @@ module Dingtalk
       @client = HttpClient.new(MSG_API_BASE, 20)
     end
 
-    def text_msg(content, *userid_list)
+    def text_msg(content, userid_list)
+      # 默认将userid_list传为数组
+      userid_list = Array(userid_list).flatten
+
       # FIX: 不清楚参数放在payload不成功，现在参数通过header来传递
       post 'router/rest', '', params: message_hash.merge(
         msgtype: 'text',
         msgcontent: JSON.generate(content: content),
-        userid_list: userid_list
+        userid_list: Array(userid_list).flatten
       )
     end
 

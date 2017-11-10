@@ -37,8 +37,8 @@
 #
 
 class Lead < ActiveRecord::Base
-  # 钉钉消息的发送账户ID
-  DINGTALK_USERID = 1.freeze
+  # 给钉钉发消息的账户IDS
+  USERIDS_FOR_DINGTALK_MSG = [4, 5]
 
   belongs_to :user
   belongs_to :campaign
@@ -199,16 +199,25 @@ class Lead < ActiveRecord::Base
 
   # 该lead创建时发送消息
   def send_created_msg
-    send_dingtalk_msg(User.find(DINGTALK_USERID), :dingtalk_lead_create_msg)
+    send_dingtalk_msg(
+      :dingtalk_lead_create_msg,
+      User.where(id: USERIDS_FOR_DINGTALK_MSG).where.not(dingid: nil).pluck(:dingid)
+    )
   end
 
   # 给该lead分配的账户时发送消息
   def send_assigned_changed_msg
-    send_dingtalk_msg(assignee, :dingtalk_lead_assignee_chaged_msg)
+    send_dingtalk_msg(
+      :dingtalk_lead_assignee_chaged_msg,
+      assignee.dingid
+    ) if assignee.dingid
   end
 
   # 发送钉钉消息
-  def send_dingtalk_msg(user, tmp)
+  def send_dingtalk_msg(tmp, dingids)
+    # 不确定dingids，是否为数组。将dingids转为在数组后，判断是否为空
+    return if Array(dingids).blank?
+
     Dingtalk.message_api.text_msg(
       I18n.t(
         tmp,
@@ -217,8 +226,8 @@ class Lead < ActiveRecord::Base
         company: company,
         source: I18n.t(:source),
         url: Rails.application.routes.url_helpers.lead_url(self)
-      ), user.dingid
-    ) if user.dingid
+      ), dingids
+    )
   end
 
   ActiveSupport.run_load_hooks(:fat_free_crm_lead, self)
