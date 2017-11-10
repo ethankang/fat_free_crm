@@ -34,7 +34,7 @@ module Dingtalk
           expires_in: (2.hours - Dingtalk::EXPIRE_OFFSET)
         )
       end
-      data["dingtalk_jsapi_ticket"]
+      data["ticket"]
     end
   end
 end
