@@ -37,6 +37,9 @@
 #
 
 class Lead < ActiveRecord::Base
+  # 钉钉消息的发送账户ID
+  DINGTALK_USERID = 1.freeze
+
   belongs_to :user
   belongs_to :campaign
   belongs_to :assignee, class_name: "User", foreign_key: :assigned_to
@@ -78,7 +81,8 @@ class Lead < ActiveRecord::Base
   validates :status, inclusion: { in: proc { Setting.unroll(:lead_status).map { |s| s.last.to_s } } }, allow_blank: true
   validates :phone, uniqueness: true, presence: true
 
-  after_create :increment_leads_count, :notify_admins
+  after_create :increment_leads_count, :notify_admins, :send_created_msg
+  after_save :send_assigned_changed_msg, if: :assigned_to_changed?
   after_destroy :decrement_leads_count
 
   # Default values provided through class methods.
@@ -191,6 +195,30 @@ class Lead < ActiveRecord::Base
 
   def notify_admins
     UserMailer.new_lead_notification(self).deliver_now
+  end
+
+  # 该lead创建时发送消息
+  def send_created_msg
+    send_dingtalk_msg(User.find(DINGTALK_USERID), :dingtalk_lead_create_msg)
+  end
+
+  # 给该lead分配的账户时发送消息
+  def send_assigned_changed_msg
+    send_dingtalk_msg(assignee, :dingtalk_lead_assignee_chaged_msg)
+  end
+
+  # 发送钉钉消息
+  def send_dingtalk_msg(user, tmp)
+    Dingtalk.message_api.text_msg(
+      I18n.t(
+        tmp,
+        name: first_name,
+        phone: phone,
+        company: company,
+        source: I18n.t(:source),
+        url: Rails.application.routes.url_helpers.lead_url(self)
+      ), user.dingid
+    ) if user.dingid
   end
 
   ActiveSupport.run_load_hooks(:fat_free_crm_lead, self)

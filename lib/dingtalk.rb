@@ -21,8 +21,12 @@ module Dingtalk
     yield(self)
   end
 
-  def self.api(account = :default)
+  def self.api
     @api ||= Api.new
+  end
+
+  def self.message_api
+    @message ||= MessageApi.new
   end
 end
 

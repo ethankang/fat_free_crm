@@ -218,6 +218,21 @@ zh-CN:
   msg_successful_signup: 成功申请，欢迎您使用 Fat Free CRM!
   msg_welcome: 欢迎使用 Fat Free CRM!
 
+  # dingtalk
+  dingtalk_lead_create_msg: "创建了一个新线索：\n
+                              姓名：%{name}\n
+                              电话：%{phone}\n
+                              公司：%{company}\n
+                              来源：%{source}\n
+                              详情：%{url}"
+
+  dingtalk_lead_assignee_chaged_msg: "您有一个新线索：\n
+                                        姓名：%{name}\n
+                                        电话：%{phone}\n
+                                        公司：%{company}\n
+                                        来源：%{source}\n
+                                        详情：%{url}"
+
   # Options.
   #----------------------------------------------------------------------------
   option_amount*probability: weighted amount
@@ -600,7 +615,7 @@ zh-CN:
   save_note: 保存备注
   add_note_help: 添加备注...
   edit_note: 编辑备注
-  added_ago: 添加于 %{value} 
+  added_ago: 添加于 %{value}
   added_by: 由 %{user}，添加于 %{time_ago}
   back: 返回
   cancel: 取消

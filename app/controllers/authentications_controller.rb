@@ -17,7 +17,7 @@ class AuthenticationsController < ApplicationController
   end
 
   def create_by_dingtalk
-    if params[:code] && result = Dingtalk.api.getuserinfo(params[:code])
+    if params[:code] && result = Dingtalk.api.user_getuserinfo(params[:code])
       Rails.logger.info("result: #{result}")
 
       if result['errcode'] == 0 && dingid = result['userid']

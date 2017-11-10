@@ -16,12 +16,16 @@ module Dingtalk
     end
 
     # 通过CODE换取用户身份
-    def getuserinfo(code)
+    def user_getuserinfo(code)
       get 'user/getuserinfo', params: {code: code}
     end
 
-    def get_org_user_count(onlyActive=1)
+    def user_get_org_user_count(onlyActive=1)
       get 'user/get_org_user_count', params: {onlyActive: onlyActive}
+    end
+
+    def message
+      Message.new(@access_token)
     end
   end
 end

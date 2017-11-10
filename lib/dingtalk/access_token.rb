@@ -21,7 +21,7 @@ module Dingtalk
           expires_in: (2.hours - Dingtalk::EXPIRE_OFFSET)
         )
       end
-      data["dingtalk_access_token"]
+      data["access_token"]
     end
 
   end
