@@ -224,7 +224,7 @@ class Lead < ActiveRecord::Base
         name: first_name,
         phone: phone,
         company: company,
-        source: I18n.t(:source),
+        source: I18n.t(source, :default => :n_a),
         url: Rails.application.routes.url_helpers.lead_url(self)
       ), dingids
     )
