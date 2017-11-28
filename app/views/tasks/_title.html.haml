@@ -1,7 +1,8 @@
+- task_title = (@view == "assigned" ? t(:assigned_tasks) : t(:tasks))
 .title_tools
   = link_to_inline(:create_task, url_for(:action => :new, :view => @view), :text => t(:create_task))
 .title#title
-  = (@view == "assigned" ? t(:assigned_tasks) : t(:tasks))
+  = (current_user.admin? && @user.present?) ? "#{@user.name}的" + task_title : task_title
   = image_tag("loading.gif", :size => :thumb, :id => "loading", :style => "display: none;")
 
 .remote#options{ hidden }

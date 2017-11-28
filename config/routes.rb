@@ -170,7 +170,7 @@ Rails.application.routes.draw do
     collection do
       post :filter
       match :auto_complete, via: [:get, :post]
-      get 'my_index/:user_id',:action => 'my_index'
+      get 'index_by_user/:user_id',:action => 'index_by_user'
     end
     member do
       put :complete

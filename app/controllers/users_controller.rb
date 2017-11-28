@@ -139,7 +139,7 @@ class UsersController < ApplicationController
                         "p"=>"eq", "v"=>{"0"=>{"value"=>"#{user_id}"}}}}}}},
      "distinct"=>"1", "page"=>"1"}
     if table_name == 'tasks'
-      redirect_to "/tasks/my_index/#{user_id}"
+      redirect_to "/tasks/index_by_user/#{user_id}"
     else
 
       redirect_to "/#{table_name}?" + unicode_url.to_param

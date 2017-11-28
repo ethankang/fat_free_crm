@@ -1,10 +1,9 @@
-- user_relation_tables ||= user_relation_tables
 .filters#filters
   .caption= '其它用户' + t("tab_#{@current_tab}") + '信息'
   %ul
-    - if lists.none?
+    - if users.none?
       %div #{t :no_saved_lists}
     - else
-      - lists.each_with_index do |item, i|
-        %li[item]{ :class => i < lists.size - 1 ? "" : "last" }
-          %tt= link_to(truncate(item.name, :length => 25),other_messages_user_path(item.id,user_relation_tables))
+      - users.each_with_index do |item, i|
+        %li[item]{ :class => i < users.size - 1 ? "" : "last" }
+          %tt= link_to(truncate(item.name, :length => 25),other_messages_user_path(item.id,@current_tab))

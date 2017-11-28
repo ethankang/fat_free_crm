@@ -5,8 +5,8 @@
 #------------------------------------------------------------------------------
 class TasksController < ApplicationController
   before_action :require_user
-  before_action :set_current_tab, only: [:index,:my_index, :show]
-  before_action :update_sidebar, only: [:index,:my_index]
+  before_action :set_current_tab, only: [:index,:index_by_user, :show]
+  before_action :update_sidebar, only: [:index,:index_by_user]
 
   # GET /tasks
   #----------------------------------------------------------------------------
@@ -20,9 +20,9 @@ class TasksController < ApplicationController
       format.xml { render xml: @tasks, except: [:subscribed_users] }
     end
   end
-  def my_index
-    @user = User.find(params[:user_id])
+  def index_by_user
     @view = view
+    @user = User.find(params[:user_id])
     @tasks = Task.find_all_grouped(@user, @view)
   end
 
@@ -57,7 +57,6 @@ class TasksController < ApplicationController
   #----------------------------------------------------------------------------
   def edit
     @view = view
-
     @task = Task.tracked_by(current_user).find(params[:id])
     @bucket = Setting.unroll(:task_bucket)[1..-1] << [t(:due_specific_date, default: 'On Specific Date...'), :specific_time]
     @category = Setting.unroll(:task_category)

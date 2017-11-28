@@ -129,7 +129,7 @@ module ApplicationHelper
   def link_to_discard(object)
     current_url = (request.xhr? ? request.referer : request.fullpath)
     parent, parent_id = current_url.scan(%r{/(\w+)/(\d+)}).flatten
-    return "" if parent == 'my_index'
+    return "" if parent == 'index_by_user'
     link_to(t(:discard),
             url_for(controller: parent, action: :discard, id: parent_id, attachment: object.class.name, attachment_id: object.id),
             method:  :post,
