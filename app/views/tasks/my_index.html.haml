@@ -8,7 +8,14 @@
     = image_tag("loading.gif", :size => :thumb, :id => "loading", :style => "display: none;")
 - else
   - buckets = Setting.unroll(:task_bucket)
-  = render "title"
+  .title_tools
+    = link_to_inline(:create_task, url_for(:action => :new, :view => @view), :text => t(:create_task))
+  .title#title
+    = @user.name + " 的" + (@view == "assigned" ? t(:assigned_tasks) : t(:tasks))
+    = image_tag("loading.gif", :size => :thumb, :id => "loading", :style => "display: none;")
+
+  .remote#options{ hidden }
+  .remote#create_task{ hidden }
 
 .log#tasks
   - buckets.each do |value, key|

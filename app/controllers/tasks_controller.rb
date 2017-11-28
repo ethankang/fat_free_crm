@@ -21,9 +21,9 @@ class TasksController < ApplicationController
     end
   end
   def my_index
-    user = User.find(params[:user_id])
+    @user = User.find(params[:user_id])
     @view = view
-    @tasks = Task.find_all_grouped(user, @view)
+    @tasks = Task.find_all_grouped(@user, @view)
   end
 
   # GET /tasks/1
@@ -57,6 +57,7 @@ class TasksController < ApplicationController
   #----------------------------------------------------------------------------
   def edit
     @view = view
+
     @task = Task.tracked_by(current_user).find(params[:id])
     @bucket = Setting.unroll(:task_bucket)[1..-1] << [t(:due_specific_date, default: 'On Specific Date...'), :specific_time]
     @category = Setting.unroll(:task_category)
