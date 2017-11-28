@@ -131,6 +131,20 @@ class UsersController < ApplicationController
     @unassigned_opportunities = Opportunity.my.unassigned.pipeline.order(:stage)
   end
 
+  def other_messages
+    table_name = params[:type]
+    user_id = params[:id]
+    unicode_url = {"utf8"=>"✓", "q"=>{"s"=>{"0"=>{"name"=>"created_at", "dir"=>"desc"}},
+                        "g"=>{"0"=>{"m"=>"and","c"=>{"0"=>{"a"=>{"0"=>{"name"=>"assigned_to"}},
+                        "p"=>"eq", "v"=>{"0"=>{"value"=>"#{user_id}"}}}}}}},
+     "distinct"=>"1", "page"=>"1"}
+    if table_name == 'tasks'
+      redirect_to "/tasks/my_index/#{user_id}"
+    else
+
+      redirect_to "/#{table_name}?" + unicode_url.to_param
+    end
+ end
   protected
 
   def user_params

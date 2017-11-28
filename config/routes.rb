@@ -170,6 +170,7 @@ Rails.application.routes.draw do
     collection do
       post :filter
       match :auto_complete, via: [:get, :post]
+      get 'my_index/:user_id',:action => 'my_index'
     end
     member do
       put :complete
@@ -184,6 +185,7 @@ Rails.application.routes.draw do
       match :upload_avatar, via: [:put, :patch]
       patch :change_password
       post :redraw
+      get 'other_messages/:type',:action => 'other_messages',:as => :other_messages
     end
     collection do
       match :auto_complete, via: [:get, :post]

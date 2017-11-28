@@ -5,8 +5,8 @@
 #------------------------------------------------------------------------------
 class TasksController < ApplicationController
   before_action :require_user
-  before_action :set_current_tab, only: [:index, :show]
-  before_action :update_sidebar, only: :index
+  before_action :set_current_tab, only: [:index,:my_index, :show]
+  before_action :update_sidebar, only: [:index,:my_index]
 
   # GET /tasks
   #----------------------------------------------------------------------------
@@ -19,6 +19,11 @@ class TasksController < ApplicationController
       format.csv { render csv: @tasks.map(&:second).flatten }
       format.xml { render xml: @tasks, except: [:subscribed_users] }
     end
+  end
+  def my_index
+    user = User.find(params[:user_id])
+    @view = view
+    @tasks = Task.find_all_grouped(user, @view)
   end
 
   # GET /tasks/1
