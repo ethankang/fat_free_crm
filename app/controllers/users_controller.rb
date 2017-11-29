@@ -131,6 +131,7 @@ class UsersController < ApplicationController
     @unassigned_opportunities = Opportunity.my.unassigned.pipeline.order(:stage)
   end
 
+  # 根据type 值跳转相对应的请求
   def entity_redirection
     table_name = params[:type]
     user_id = params[:id]

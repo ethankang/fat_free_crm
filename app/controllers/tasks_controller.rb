@@ -20,6 +20,8 @@ class TasksController < ApplicationController
       format.xml { render xml: @tasks, except: [:subscribed_users] }
     end
   end
+
+  # 查找用户的任务信息
   def index_by_user
     @view = view
     @user = User.find(params[:user_id])
