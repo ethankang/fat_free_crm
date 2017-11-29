@@ -131,7 +131,7 @@ class UsersController < ApplicationController
     @unassigned_opportunities = Opportunity.my.unassigned.pipeline.order(:stage)
   end
 
-  def other_messages
+  def entity_redirection
     table_name = params[:type]
     user_id = params[:id]
     unicode_url = {"utf8"=>"✓", "q"=>{"s"=>{"0"=>{"name"=>"created_at", "dir"=>"desc"}},

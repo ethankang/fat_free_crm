@@ -185,7 +185,7 @@ Rails.application.routes.draw do
       match :upload_avatar, via: [:put, :patch]
       patch :change_password
       post :redraw
-      get 'other_messages/:type',:action => 'other_messages',:as => :other_messages
+      get 'entity_redirection/:type',:action => 'entity_redirection',:as => :entity_redirection
     end
     collection do
       match :auto_complete, via: [:get, :post]
