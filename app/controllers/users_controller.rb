@@ -148,7 +148,8 @@ class UsersController < ApplicationController
       # 今日转化leads
       if table_name.include?('converted')
         @entity_index_data = @entity_index_data.where(converted_at:(Time.current.beginning_of_day..Time.current.end_of_day))
-                                               .where("status = ? ",'converted').order("created_at desc")
+                                               .where("status = ? ",'converted')
+                                               .where(converted_operate_id: user_id).order("created_at desc")
       # 今日leads
       else
         @entity_index_data = @entity_index_data.where('updated_at between ? and ?',Time.current.beginning_of_day,Time.current.end_of_day)
