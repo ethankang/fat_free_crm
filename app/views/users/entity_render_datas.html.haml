@@ -1,6 +1,6 @@
 
 .title
-  = link_to(@select_user.name,"/#{params[:type]}")
+  = link_to(@select_user.name,"/#{params[:type].split("_").last}")
 .list#leads
   - if @entity_index_data.any?
     = render @entity_index_data
