@@ -125,6 +125,7 @@ class LeadsController < EntitiesController
     respond_with(@lead) do |format|
       if @account.errors.empty? && @opportunity.errors.empty? && @contact.errors.empty?
         @lead.convert
+        # 修改转化操作人和转化时间
         @lead.update_attributes(converted_at: Time.current,converted_operate_id: current_user.id)
         update_sidebar
       else

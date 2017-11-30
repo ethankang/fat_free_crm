@@ -137,23 +137,29 @@ class UsersController < ApplicationController
     set_current_tab('team_overview')
   end
 
-  # 根据type 值跳转相对应的请求
+  # 根据type 值向页面render 不同数据源
   def entity_render_datas
     table_name,user_id  = params[:type],params[:id]
     redirect_to "/tasks/index_by_user/#{user_id}" if table_name == 'tasks'
+
     @select_user = User.find(user_id)
     if table_name.include?("day_")
       @entity_index_data = Lead.search('user_id_or_assigned_to_eq' => user_id).result
-                               .where('updated_at between ? and ?',Time.current.beginning_of_day,Time.current.end_of_day)
-
+      # 今日转化leads
       if table_name.include?('converted')
-        @entity_index_data = @entity_index_data.where("status = ?",'converted').order("created_at desc")
+        @entity_index_data = @entity_index_data.where(converted_at:(Time.current.beginning_of_day..Time.current.end_of_day))
+                                               .where("status = ? ",'converted').order("created_at desc")
+      # 今日leads
+      else
+        @entity_index_data = @entity_index_data.where('updated_at between ? and ?',Time.current.beginning_of_day,Time.current.end_of_day)
       end
       table_name = table_name.split("_").last
     else
+      #   个人 线索、公司、联系人、商机数据
       entity_model = table_name.classify.constantize
       @entity_index_data= entity_model.search('user_id_or_assigned_to_eq' => user_id).result.order("created_at desc")
     end
+    # 切换tab
     set_current_tab(table_name)
  end
   protected
