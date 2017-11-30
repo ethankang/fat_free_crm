@@ -1,0 +1,10 @@
+= styles_for :opportunity
+
+#create_opportunity{ hidden }
+
+- if @team_users.present?
+  %ul
+    = render :partial => "team_information"
+
+- else
+  = t(:no_activity_records)

@@ -131,20 +131,30 @@ class UsersController < ApplicationController
     @unassigned_opportunities = Opportunity.my.unassigned.pipeline.order(:stage)
   end
 
-  # 根据type 值跳转相对应的请求
-  def entity_redirection
-    table_name = params[:type]
-    user_id = params[:id]
-    unicode_url = {"utf8"=>"✓", "q"=>{"s"=>{"0"=>{"name"=>"created_at", "dir"=>"desc"}},
-                        "g"=>{"0"=>{"m"=>"and","c"=>{"0"=>{"a"=>{"0"=>{"name"=>"assigned_to"}},
-                        "p"=>"eq", "v"=>{"0"=>{"value"=>"#{user_id}"}}}}}}},
-     "distinct"=>"1", "page"=>"1"}
-    if table_name == 'tasks'
-      redirect_to "/tasks/index_by_user/#{user_id}"
-    else
+  # 团队总线索数、总商机额整合
+  def team_overview
+    @team_users = User.active
+    set_current_tab('team_overview')
+  end
 
-      redirect_to "/#{table_name}?" + unicode_url.to_param
+  # 根据type 值跳转相对应的请求
+  def entity_render_datas
+    table_name,user_id  = params[:type],params[:id]
+    redirect_to "/tasks/index_by_user/#{user_id}" if table_name == 'tasks'
+    @select_user = User.find(user_id)
+    if table_name.include?("day_")
+      @entity_index_data = Lead.search('user_id_or_assigned_to_eq' => user_id).result
+                               .where('updated_at between ? and ?',Time.current.beginning_of_day,Time.current.end_of_day)
+
+      if table_name.include?('converted')
+        @entity_index_data = @entity_index_data.where("status = ?",'converted').order("created_at desc")
+      end
+      table_name = table_name.split("_").last
+    else
+      entity_model = table_name.classify.constantize
+      @entity_index_data= entity_model.search('user_id_or_assigned_to_eq' => user_id).result.order("created_at desc")
     end
+    set_current_tab(table_name)
  end
   protected
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171109015558) do
+ActiveRecord::Schema.define(version: 20171130052619) do
 
   create_table "account_contacts", force: :cascade do |t|
     t.integer  "account_id", limit: 4
@@ -252,33 +252,35 @@ ActiveRecord::Schema.define(version: 20171109015558) do
   add_index "groups_users", ["user_id"], name: "index_groups_users_on_user_id", using: :btree
 
   create_table "leads", force: :cascade do |t|
-    t.integer  "user_id",          limit: 4
-    t.integer  "campaign_id",      limit: 4
-    t.integer  "assigned_to",      limit: 4
-    t.string   "first_name",       limit: 64,    default: "",       null: false
-    t.string   "last_name",        limit: 64,    default: "",       null: false
-    t.string   "access",           limit: 8,     default: "Public"
-    t.string   "title",            limit: 64
-    t.string   "company",          limit: 64
-    t.string   "source",           limit: 32
-    t.string   "status",           limit: 32
-    t.string   "referred_by",      limit: 64
-    t.string   "email",            limit: 254
-    t.string   "alt_email",        limit: 254
-    t.string   "phone",            limit: 32
-    t.string   "mobile",           limit: 32
-    t.string   "blog",             limit: 128
-    t.string   "linkedin",         limit: 128
-    t.string   "facebook",         limit: 128
-    t.string   "twitter",          limit: 128
-    t.integer  "rating",           limit: 4,     default: 0,        null: false
-    t.boolean  "do_not_call",                    default: false,    null: false
+    t.integer  "user_id",              limit: 4
+    t.integer  "campaign_id",          limit: 4
+    t.integer  "assigned_to",          limit: 4
+    t.string   "first_name",           limit: 64,    default: "",       null: false
+    t.string   "last_name",            limit: 64,    default: "",       null: false
+    t.string   "access",               limit: 8,     default: "Public"
+    t.string   "title",                limit: 64
+    t.string   "company",              limit: 64
+    t.string   "source",               limit: 32
+    t.string   "status",               limit: 32
+    t.string   "referred_by",          limit: 64
+    t.string   "email",                limit: 254
+    t.string   "alt_email",            limit: 254
+    t.string   "phone",                limit: 32
+    t.string   "mobile",               limit: 32
+    t.string   "blog",                 limit: 128
+    t.string   "linkedin",             limit: 128
+    t.string   "facebook",             limit: 128
+    t.string   "twitter",              limit: 128
+    t.integer  "rating",               limit: 4,     default: 0,        null: false
+    t.boolean  "do_not_call",                        default: false,    null: false
     t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "background_info",  limit: 255
-    t.string   "skype",            limit: 128
-    t.text     "subscribed_users", limit: 65535
+    t.string   "background_info",      limit: 255
+    t.string   "skype",                limit: 128
+    t.text     "subscribed_users",     limit: 65535
+    t.datetime "converted_at"
+    t.integer  "converted_operate_id", limit: 4
   end
 
   add_index "leads", ["assigned_to"], name: "index_leads_on_assigned_to", using: :btree

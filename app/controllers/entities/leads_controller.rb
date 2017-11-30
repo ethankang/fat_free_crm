@@ -125,6 +125,7 @@ class LeadsController < EntitiesController
     respond_with(@lead) do |format|
       if @account.errors.empty? && @opportunity.errors.empty? && @contact.errors.empty?
         @lead.convert
+        @lead.update_attributes(converted_at: Time.current,converted_operate_id: current_user.id)
         update_sidebar
       else
         format.json { render json: @account.errors + @opportunity.errors + @contact.errors, status: :unprocessable_entity }

@@ -1,5 +1,7 @@
 - if (params['controller'] == 'accounts') and (template = template_for_current_view).present?
   = render(template, :account => account)
+- elsif params[:type].present?
+  = render 'accounts/index_long', :account => account
 - else
   -# default view
   = render 'accounts/index_brief', :account => account

@@ -1,0 +1,8 @@
+
+.title
+  = link_to(@select_user.name,"/#{params[:type]}")
+.list#leads
+  - if @entity_index_data.any?
+    = render @entity_index_data
+  - else
+    = render "shared/empty"

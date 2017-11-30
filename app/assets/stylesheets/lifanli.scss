@@ -16,4 +16,34 @@
     font-weight: bolder;
   }
 
+
 }
+.table {
+  width: 100%;
+  max-width: 100%;
+  margin: 20px 0;
+  border: 1px solid #ddd;
+  border-radius: 10px 15px 20px 30px / 20px 30px 10px 15px;
+}
+
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+  padding: 8px;
+  line-height: 1.42857143;
+
+}
+.user_title{
+  font-size: 22px;
+  font-weight: bolder;
+}
+.overview_title{
+  font-size: 18px;
+  font-weight: bolder;
+  colspan:2;
+  align:center
+}
+
+

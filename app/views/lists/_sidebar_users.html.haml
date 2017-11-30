@@ -6,4 +6,4 @@
     - else
       - users.each_with_index do |item, i|
         %li[item]{ :class => i < users.size - 1 ? "" : "last" }
-          %tt= link_to(truncate(item.name, :length => 25),entity_redirection_user_path(item.id,@current_tab))
+          %tt= link_to(truncate(item.name, :length => 25),entity_render_datas_user_path(item.id,@current_tab))
