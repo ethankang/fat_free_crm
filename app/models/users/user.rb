@@ -59,6 +59,7 @@ class User < ActiveRecord::Base
   scope :without, ->(user) { where('id != ?', user.id).by_name }
   scope :by_name, -> { order('first_name, last_name, email') }
 
+  scope :active, -> { where('suspended_at is null') }
   scope :text_search, ->(query) {
     query = query.gsub(/[^\w\s\-\.'\p{L}]/u, '').strip
     where('upper(username) LIKE upper(:s) OR upper(email) LIKE upper(:s) OR upper(first_name) LIKE upper(:s) OR upper(last_name) LIKE upper(:s)', s: "%#{query}%")
