@@ -1,6 +1,6 @@
-
+- size = @team_users.size
 - @team_users.each do |user|
-  .user_title= user.name
+  .user_title= user.name unless size == 1
   %table.table
     - assigneds = Lead.where('assigned_to = ? or user_id = ?',user.id,user.id)
     - converteds = assigneds.converted.where(converted_operate_id: user.id)
