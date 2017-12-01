@@ -32,7 +32,7 @@
     %tr
       %td 今日线索数
       - day_leads_count = assigneds.where(updated_at:(Time.current.beginning_of_day..Time.current.end_of_day)).size
-      %td= link_to(day_leads_count,entity_render_datas_user_path(user.id,'day_leads'))
+      %td= link_to(day_leads_count,entity_redirection_user_path(user.id,'day_leads'))
       %td 今日成单额
       %td= Opportunity.assigned_to(user).won.where(closes_on: (Time.current.beginning_of_day..Time.current.end_of_day)).amount_sum.to_i
 
@@ -40,4 +40,4 @@
     %tr
       %td 今日转化数
       - converteds_count = converteds.where(converted_at:(Time.current.beginning_of_day..Time.current.end_of_day)).size
-      %td= link_to(converteds_count,entity_render_datas_user_path(user.id,'day_converted_leads'))
+      %td= link_to(converteds_count,entity_redirection_user_path(user.id,'day_converted_leads'))

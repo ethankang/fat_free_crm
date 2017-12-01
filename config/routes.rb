@@ -186,6 +186,7 @@ Rails.application.routes.draw do
       patch :change_password
       post :redraw
       get 'entity_render_datas/:type',:action => 'entity_render_datas',:as => :entity_render_datas
+      get 'entity_redirection/:type',:action => 'entity_redirection',:as => :entity_redirection
     end
     collection do
       match :auto_complete, via: [:get, :post]
