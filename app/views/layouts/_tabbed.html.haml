@@ -5,6 +5,11 @@
         = link_to(tab[:url], :class => tab[:active] ? "active" : nil) do
           %i.fa{class: tab[:icon]}
           = t(tab[:text])
+    - if current_user.admin?
+      %li
+        = link_to("/users/team_overview",class: @current_tab == 'team_overview' ? 'active' : '') do
+          %i.fa{class: "fa-globe"}
+          团队
     %li
       = link_to("/wiki", target: :blank) do
         %i.fa{class: "fa-book"}

@@ -1,6 +1,12 @@
 
 = styles_for :task, :opportunity, :account
-
+.title
+  %span#title 个人线索、商机汇总
+%ul.list#leads
+  - if current_user.leads.present? || Lead.assigned_to(current_user).present? || @my_opportunities.present?
+    = render :partial => 'users/team_information', :object => @team_users
+  - else
+    #{t :no_activity_records}
 .title
   %span#title #{t :my_tasks}
 %ul.list#tasks

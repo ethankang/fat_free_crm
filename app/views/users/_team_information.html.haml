@@ -1,0 +1,43 @@
+- size = @team_users.size
+- @team_users.each do |user|
+  .user_title= user.name unless size == 1
+  %table.table
+    - assigneds = Lead.where('assigned_to = ? or user_id = ?',user.id,user.id)
+    - converteds = assigneds.converted.where(converted_operate_id: user.id)
+    - month_converteds = converteds.where(converted_at:(Time.current.beginning_of_month..Time.current.end_of_month)).size
+    %tr
+      %th.overview_title{colspan:2} 个人线索汇总
+      %th.overview_title{colspan:2}个人商机额汇总
+    %tr
+      %td 总线索数
+      %td= assigneds.size
+      %td 总商机额
+      %td= Opportunity.assigned_to(user).not_lost.amount_sum.to_i
+    %tr
+      %td 当月线索数
+      %td= assigneds.where(updated_at:(Time.current.beginning_of_month..Time.current.end_of_month)).size
+      %td 进行中的商机额
+      %td= Opportunity.assigned_to(user).pipeline.amount_sum.to_i
+    %tr
+      %td 当月转化数
+      %td= month_converteds
+      %td 总成单额
+      %td= Opportunity.assigned_to(user).won.amount_sum.to_i
+    %tr
+      %td 当月转化率(%)
+      %td=  assigneds.size.zero? ? 0 : ((month_converteds.to_f/assigneds.size.to_f)*100).round(2)
+      %td 本月成单额
+      %td= Opportunity.assigned_to(user).won.where(closes_on: (Time.current.beginning_of_month..Time.current.end_of_month)).amount_sum.to_i
+
+    %tr
+      %td 今日线索数
+      - day_leads_count = assigneds.where(updated_at:(Time.current.beginning_of_day..Time.current.end_of_day)).size
+      %td= link_to(day_leads_count,entity_render_datas_user_path(user.id,'day_leads'))
+      %td 今日成单额
+      %td= Opportunity.assigned_to(user).won.where(closes_on: (Time.current.beginning_of_day..Time.current.end_of_day)).amount_sum.to_i
+
+
+    %tr
+      %td 今日转化数
+      - converteds_count = converteds.where(converted_at:(Time.current.beginning_of_day..Time.current.end_of_day)).size
+      %td= link_to(converteds_count,entity_render_datas_user_path(user.id,'day_converted_leads'))

@@ -58,6 +58,7 @@ class User < ActiveRecord::Base
   scope :by_id, -> { order('id DESC') }
   scope :without, ->(user) { where('id != ?', user.id).by_name }
   scope :by_name, -> { order('first_name, last_name, email') }
+  scope :active, -> { where( suspended_at: nil ) }
 
   scope :active, -> { where('suspended_at is null') }
   scope :text_search, ->(query) {

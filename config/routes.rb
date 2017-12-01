@@ -185,11 +185,12 @@ Rails.application.routes.draw do
       match :upload_avatar, via: [:put, :patch]
       patch :change_password
       post :redraw
-      get 'entity_redirection/:type',:action => 'entity_redirection',:as => :entity_redirection
+      get 'entity_render_datas/:type',:action => 'entity_render_datas',:as => :entity_render_datas
     end
     collection do
       match :auto_complete, via: [:get, :post]
       get :opportunities_overview
+      get :team_overview
     end
   end
 
