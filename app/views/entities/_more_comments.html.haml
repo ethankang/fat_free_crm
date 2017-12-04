@@ -1,0 +1,15 @@
+%ul.tools
+  %li=link_to("更多备注","javascript:volid(0)",id:entity_model.id,:onclick => "read_more(this)")
+%dt.comments.highlight{id:  "#{entity_model.id}_comments".freeze,style: 'display:none;'}
+  .subtitle 备注信息
+  .body
+    - entity_model.comments.order('id desc').each do |commnet|
+      .textile= commnet.created_at
+      .textile= commnet.comment
+      .subtitle
+:javascript
+  function read_more(ele){
+    var entity_id = ele.id
+    comment_show = $("#"+ entity_id + "_comments").css('display');
+    $("#" + entity_id + "_comments").css('display',comment_show == 'block' ? 'none' : 'block');
+  }
