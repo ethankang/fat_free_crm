@@ -67,7 +67,9 @@ class Opportunity < ActiveRecord::Base
   scope :by_closes_on, -> { order(:closes_on) }
   scope :by_amount,    -> { order('opportunities.amount DESC') }
   scope :amount_sum,    -> { sum(:amount) }
-
+  scope :by_time, -> (start_time,end_time){
+    where('created_at BETWEEN :start_time AND :end_time or closes_on BETWEEN :start_time AND :end_time',start_time: start_time,end_time: end_time)
+  }
   uses_user_permissions
   acts_as_commentable
   uses_comment_extensions
