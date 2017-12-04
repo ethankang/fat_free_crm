@@ -55,14 +55,5 @@
     %dt
       = account.comments.last.try(:comment)
       - if account.comments.size.freeze > 1
-        %ul.tools
-          %li=link_to("更多","javascript:volid(0)",id:account.id,:onclick => "read_more(this)")
-      %dt.comments{id:  "#{account.id}_comments".freeze,style: 'display:none;color:#ccc'}
-        = raw "<p>备注信息:</p>" + account.comments.order("id desc").map(&:comment).join("<p></p>")
+        = render :partial => 'entities/more_comments',:locals => {:entity_model => account}
       = hook(:account_bottom, self, :account => account)
-:javascript
-  function read_more(ele){
-    var account_id = ele.id
-    comment_show = $("#"+ account_id + "_comments").css('display');
-    $("#" + account_id + "_comments").css('display',comment_show == 'block' ? 'none' : 'block');
-  }

@@ -31,10 +31,7 @@
     %dt
       = opportunity.comments.last.try(:comment)
       - if opportunity.comments.size.freeze > 1
-        %ul.tools
-          %li=link_to("更多","javascript:volid(0)",id:opportunity.id,:onclick => "read_more(this)")
-      %dt.comments{id:  "#{opportunity.id}_comments".freeze,style: 'display:none;color:#ccc'}
-        = raw "<p>所有备注信息:</p>" + opportunity.comments.order('id desc').map(&:comment).join("<p></p>")
+        = render :partial => 'entities/more_comments',:locals => {:entity_model => opportunity}
     -#
       %b= number_to_currency(opportunity.weighted_amount, :precision => 0) + " | "
       - won_or_lost = %w(won lost).include?(opportunity.stage)
@@ -66,9 +63,3 @@
           .tags= tags_for_index(opportunity)
 
     = hook(:opportunity_bottom, self, :opportunity => opportunity)
-:javascript
-  function read_more(ele){
-    var opportunity_id = ele.id
-    comment_show = $("#"+ opportunity_id + "_comments").css('display');
-    $("#" + opportunity_id + "_comments").css('display',comment_show == 'inline' ? 'none' : 'inline');
-  }

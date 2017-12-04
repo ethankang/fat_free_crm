@@ -70,14 +70,5 @@
         %dt
     = lead.comments.last.try(:comment)
     - if lead.comments.size.freeze > 1
-      %ul.tools
-        %li=link_to("更多","javascript:void(0)",id:lead.id,:onclick => "read_more(this)")
-    %dt.comments{id:  "#{lead.id}_comments".freeze,style: 'display:none;color:#ccc'}
-      = raw "<p>所有备注信息:</p>" + lead.comments.order("id desc").map(&:comment).join("<p></p>")
+      = render :partial => 'entities/more_comments',:locals => {:entity_model => lead}
     = hook(:lead_bottom, self, :lead => lead)
-:javascript
-  function read_more(ele){
-    var lead_id = ele.id
-    comment_show = $("#"+ lead_id + "_comments").css('display');
-    $("#" + lead_id + "_comments").css('display',comment_show == 'inline' ? 'none' : 'inline');
-  }
