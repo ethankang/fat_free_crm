@@ -142,6 +142,8 @@ zh-CN:
           attributes:
             name:
               missing_opportunity_name: ^请指定商机名称
+            closes_on:
+              missing_opportunity_closes_on: ^请指定商机结束时间
             access:
               share_opportunity: ^请指定可以共享商机的用户
         task:

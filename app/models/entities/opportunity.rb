@@ -50,6 +50,7 @@ class Opportunity < ActiveRecord::Base
   scope :unassigned,  -> { where("opportunities.assigned_to IS NULL") }
   scope :create_or_assigned, -> (user){ where('user_id = ? or assigned_to = ?', user.id,user.id) }
 
+
   # Search by name OR id
   scope :text_search, ->(query) {
     if query =~ /\A\d+\z/
@@ -68,7 +69,7 @@ class Opportunity < ActiveRecord::Base
   scope :by_amount,    -> { order('opportunities.amount DESC') }
   scope :amount_sum,    -> { sum(:amount) }
   scope :by_time, -> (start_time,end_time){
-    where('created_at BETWEEN :start_time AND :end_time or closes_on BETWEEN :start_time AND :end_time',start_time: start_time,end_time: end_time)
+    where('closes_on BETWEEN :start_time AND :end_time',start_time: start_time,end_time: end_time)
   }
   uses_user_permissions
   acts_as_commentable
@@ -86,7 +87,7 @@ class Opportunity < ActiveRecord::Base
   validates_numericality_of [:probability, :amount, :discount], allow_nil: true
   validate :users_for_shared_access
   validates :stage, inclusion: { in: proc { Setting.unroll(:opportunity_stage).map { |s| s.last.to_s } } }, allow_blank: true
-
+  validates_presence_of :closes_on,message: :missing_opportunity_closes_on, if: Proc.new { |opp| opp.stage == 'won'}
   after_create :increment_opportunities_count
   after_destroy :decrement_opportunities_count
 
