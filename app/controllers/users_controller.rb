@@ -137,32 +137,37 @@ class UsersController < ApplicationController
     set_current_tab('team_overview')
   end
 
-  # 根据type 值向页面render 不同数据源
-  def entity_render_datas
-    table_name,user_id  = params[:type],params[:id]
-    redirect_to "/tasks/index_by_user/#{user_id}" if table_name == 'tasks'
+  # 根据不同type redirect_to
+  def entity_redirection
+    table_name,user_id ,search_params = params[:type],params[:id],""
+    redirect_to "/tasks/index_by_user/#{user_id}" and return if table_name == 'tasks'
+    search_params = {"utf8"=>"✓", "q"=>{"s"=>{"0"=>{"name"=>"updated_at", "dir"=>"desc"}},
+                                        "g"=>{"0"=>{"m"=>"or", "c"=>{"0"=>{"a"=>{"0"=>{"name"=>"user_id"}},
+                                        "p"=>"eq", "v"=>{"0"=>{"value"=>"#{user_id}"}}},
+                                        "1"=>{"a"=>{"0"=>{"name"=>"assigned_to"}}, "p"=>"eq", "v"=>{"0"=>{"value"=>"#{user_id}"}}}}}}},
+                     "distinct"=>"1", "page"=>"1"}
 
-    @select_user = User.find(user_id)
-    if table_name.include?("day_")
-      @entity_index_data = Lead.search('user_id_or_assigned_to_eq' => user_id).result
-      # 今日转化leads
-      if table_name.include?('converted')
-        @entity_index_data = @entity_index_data.where(converted_at:(Time.current.beginning_of_day..Time.current.end_of_day))
-                                               .where("status = ? ",'converted')
-                                               .where(converted_operate_id: user_id).order("created_at desc")
-      # 今日leads
-      else
-        @entity_index_data = @entity_index_data.where('updated_at between ? and ?',Time.current.beginning_of_day,Time.current.end_of_day)
-      end
-      table_name = table_name.split("_").last
-    else
-      #   个人 线索、公司、联系人、商机数据
-      entity_model = table_name.classify.constantize
-      @entity_index_data= entity_model.search('user_id_or_assigned_to_eq' => user_id).result.order("created_at desc")
+
+    if table_name.include?("converted")
+      search_params =  {"utf8"=>"✓", "q"=>{"s"=>{"0"=>{"name"=>"updated_at", "dir"=>"desc"}},
+                                           "g"=>{"0"=>{"m"=>"or", "c"=>{"0"=>{"a"=>{"0"=>{"name"=>"user_id"}},
+                                           "p"=>"eq", "v"=>{"0"=>{"value"=>"#{user_id}"}}}, "1"=>{"a"=>{"0"=>{"name"=>"assigned_to"}},
+                                           "p"=>"eq", "v"=>{"0"=>{"value"=>"#{user_id}"}}}}}, "2"=>{"m"=>"and", "c"=>{"0"=>{"a"=>{"0"=>{"name"=>"converted_at"}},
+                                           "p"=>"gt", "v"=>{"0"=>{"value"=>"#{Time.current.beginning_of_day}"}}}, "3"=>{"a"=>{"0"=>{"name"=>"converted_at"}},
+                                           "p"=>"lt", "v"=>{"0"=>{"value"=>"#{Time.current.end_of_day}"}}},"4" =>{"a"=>{"0"=>{"name"=>"converted_operate_id"}},
+                                           "p"=>"eq", "v"=>{"0"=>{"value"=>"#{user_id}"}}}}}}}, "distinct"=>"1", "page"=>"1"}
+    elsif table_name == 'day_leads'
+      search_params =  {"utf8"=>"✓", "q"=>{"s"=>{"0"=>{"name"=>"updated_at", "dir"=>"desc"}},
+                                          "g"=>{"0"=>{"m"=>"or", "c"=>{"0"=>{"a"=>{"0"=>{"name"=>"user_id"}},
+                                          "p"=>"eq", "v"=>{"0"=>{"value"=>"#{user_id}"}}}, "1"=>{"a"=>{"0"=>{"name"=>"assigned_to"}},
+                                          "p"=>"eq", "v"=>{"0"=>{"value"=>"#{user_id}"}}}}}, "2"=>{"m"=>"and", "c"=>{"0"=>{"a"=>{"0"=>{"name"=>"updated_at"}},
+                                          "p"=>"gt", "v"=>{"0"=>{"value"=>"#{Time.current.beginning_of_day}"}}}, "3"=>{"a"=>{"0"=>{"name"=>"updated_at"}},
+                                          "p"=>"lt", "v"=>{"0"=>{"value"=>"#{Time.current.end_of_day}"}}}}}}}, "distinct"=>"1", "page"=>"1"}
+
+
     end
-    # 切换tab
-    set_current_tab(table_name)
- end
+    redirect_to "/#{table_name.split("_").last}?"+ search_params.to_query
+  end
   protected
 
   def user_params

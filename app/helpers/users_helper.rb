@@ -21,6 +21,10 @@ module UsersHelper
     User.by_name
   end
 
+  def active_users
+    User.by_name.active
+  end
+
   def user_select(asset, users, myself)
     user_options = user_options_for_select(users, myself)
     select(asset, :assigned_to, user_options,
