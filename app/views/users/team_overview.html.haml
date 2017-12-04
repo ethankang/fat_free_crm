@@ -5,7 +5,7 @@
 - if @team_users.present?
   %ul
     - @team_users.each do |user|
-      = render :partial => "user_information",:object => user
+      = render :partial => "user_information",:locals => {:user => user}
 
 
 - else
