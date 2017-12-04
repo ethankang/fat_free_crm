@@ -185,7 +185,6 @@ Rails.application.routes.draw do
       match :upload_avatar, via: [:put, :patch]
       patch :change_password
       post :redraw
-      get 'entity_render_datas/:type',:action => 'entity_render_datas',:as => :entity_render_datas
       get 'entity_redirection/:type',:action => 'entity_redirection',:as => :entity_redirection
     end
     collection do
