@@ -4,7 +4,9 @@
 
 - if @team_users.present?
   %ul
-    = render :partial => "team_information"
+    - @team_users.each do |user|
+      = render :partial => "user_information",:object => user
+
 
 - else
   = t(:no_activity_records)

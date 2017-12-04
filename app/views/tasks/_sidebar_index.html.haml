@@ -1,6 +1,11 @@
 .filters#filters
   = render "selector"
+
+  = check_box_tag(@view, 'all',false,id: 'check_all')
+  全选
+
   - if @view == "pending" || @view == "assigned"
+
     - Setting.unroll(:task_bucket).each do |value, key|
       .check_box{:style => "border-bottom: 1px silver dotted;"}
         %div{:style => "float:right;"}
@@ -16,3 +21,14 @@
     %div{:style => "float:right;"}
       %b= @task_total[:all]
     %b== #{t(:total_tasks, t(@view + '_tasks'))}
+:javascript
+  $("#check_all").click(function(){
+     if($(this).prop("checked")){
+        $("input[name='filters[]']").attr("checked","true");
+        $("#tasks").children().css("display","block")
+     }else{
+        $("input[name='filters[]']").removeAttr("checked");
+        $("#tasks").children().css("display","none")
+     }
+  })
+

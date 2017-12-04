@@ -525,4 +525,27 @@ module ApplicationHelper
     options = { renderer: RemoteLinkPaginationHelper::LinkRenderer }.merge(options)
     will_paginate(collection, options)
   end
+
+  # checkout全选动态获取数据
+  def entity_checkbox_all(name)
+    url = url_for(action: :filter)
+    onclick = %{
+      var query = $('#query').val(), values = [];
+      if($(this).prop("checked")){
+        $('input[name=&quot;#{h name}[]&quot;]').attr("checked","true");
+
+        $('input[name=&quot;#{h name}[]&quot;]').filter(':checked').each(function () {
+          values.push(this.value);
+        });
+      }else{
+        $('input[name=&quot;#{h name}[]&quot;]').removeAttr("checked");
+        values = []
+      }
+      $('#loading').show();
+      $.post('#{url}', {#{h name}: values.join(','), query: query}, function () {
+        $('#loading').hide();
+      });
+    }.html_safe
+    check_box_tag("#{name}[]", '', true, id: 'checked_all', onclick: onclick)
+  end
 end
