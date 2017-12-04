@@ -141,7 +141,7 @@ class UsersController < ApplicationController
   def entity_redirection
     table_name,user_id ,search_params = params[:type],params[:id],""
     redirect_to "/tasks/index_by_user/#{user_id}" and return if table_name == 'tasks'
-    search_params = {"utf8"=>"✓", "q"=>{"s"=>{"0"=>{"name"=>"updated_at", "dir"=>"desc"}},
+    search_params = {"utf8"=>"✓", "q"=>{"s"=>{"0"=>{"name"=>"created_at", "dir"=>"desc"}},
                                         "g"=>{"0"=>{"m"=>"or", "c"=>{"0"=>{"a"=>{"0"=>{"name"=>"user_id"}},
                                         "p"=>"eq", "v"=>{"0"=>{"value"=>"#{user_id}"}}},
                                         "1"=>{"a"=>{"0"=>{"name"=>"assigned_to"}}, "p"=>"eq", "v"=>{"0"=>{"value"=>"#{user_id}"}}}}}}},
@@ -149,7 +149,7 @@ class UsersController < ApplicationController
 
 
     if table_name.include?("converted")
-      search_params =  {"utf8"=>"✓", "q"=>{"s"=>{"0"=>{"name"=>"updated_at", "dir"=>"desc"}},
+      search_params =  {"utf8"=>"✓", "q"=>{"s"=>{"0"=>{"name"=>"created_at", "dir"=>"desc"}},
                                            "g"=>{"0"=>{"m"=>"or", "c"=>{"0"=>{"a"=>{"0"=>{"name"=>"user_id"}},
                                            "p"=>"eq", "v"=>{"0"=>{"value"=>"#{user_id}"}}}, "1"=>{"a"=>{"0"=>{"name"=>"assigned_to"}},
                                            "p"=>"eq", "v"=>{"0"=>{"value"=>"#{user_id}"}}}}}, "2"=>{"m"=>"and", "c"=>{"0"=>{"a"=>{"0"=>{"name"=>"converted_at"}},
@@ -157,11 +157,11 @@ class UsersController < ApplicationController
                                            "p"=>"lt", "v"=>{"0"=>{"value"=>"#{Time.current.end_of_day}"}}},"4" =>{"a"=>{"0"=>{"name"=>"converted_operate_id"}},
                                            "p"=>"eq", "v"=>{"0"=>{"value"=>"#{user_id}"}}}}}}}, "distinct"=>"1", "page"=>"1"}
     elsif table_name == 'day_leads'
-      search_params =  {"utf8"=>"✓", "q"=>{"s"=>{"0"=>{"name"=>"updated_at", "dir"=>"desc"}},
+      search_params =  {"utf8"=>"✓", "q"=>{"s"=>{"0"=>{"name"=>"created_at", "dir"=>"desc"}},
                                           "g"=>{"0"=>{"m"=>"or", "c"=>{"0"=>{"a"=>{"0"=>{"name"=>"user_id"}},
                                           "p"=>"eq", "v"=>{"0"=>{"value"=>"#{user_id}"}}}, "1"=>{"a"=>{"0"=>{"name"=>"assigned_to"}},
-                                          "p"=>"eq", "v"=>{"0"=>{"value"=>"#{user_id}"}}}}}, "2"=>{"m"=>"and", "c"=>{"0"=>{"a"=>{"0"=>{"name"=>"updated_at"}},
-                                          "p"=>"gt", "v"=>{"0"=>{"value"=>"#{Time.current.beginning_of_day}"}}}, "3"=>{"a"=>{"0"=>{"name"=>"updated_at"}},
+                                          "p"=>"eq", "v"=>{"0"=>{"value"=>"#{user_id}"}}}}}, "2"=>{"m"=>"and", "c"=>{"0"=>{"a"=>{"0"=>{"name"=>"created_at"}},
+                                          "p"=>"gt", "v"=>{"0"=>{"value"=>"#{Time.current.beginning_of_day}"}}}, "3"=>{"a"=>{"0"=>{"name"=>"created_at"}},
                                           "p"=>"lt", "v"=>{"0"=>{"value"=>"#{Time.current.end_of_day}"}}}}}}}, "distinct"=>"1", "page"=>"1"}
 
 
