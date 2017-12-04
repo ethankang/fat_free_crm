@@ -48,6 +48,7 @@ class Opportunity < ActiveRecord::Base
   scope :not_lost,    -> { where("opportunities.stage <> 'lost'") }
   scope :pipeline,    -> { where("opportunities.stage IS NULL OR (opportunities.stage != 'won' AND opportunities.stage != 'lost')") }
   scope :unassigned,  -> { where("opportunities.assigned_to IS NULL") }
+  scope :create_or_assigned, -> (user){ where('user_id = ? or assigned_to = ?', user.id,user.id) }
 
   # Search by name OR id
   scope :text_search, ->(query) {
