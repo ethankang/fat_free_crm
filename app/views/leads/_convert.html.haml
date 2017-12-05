@@ -16,7 +16,7 @@
             %td= spacer
             %td
               .label.req #{t :assigned_to}:
-              = user_select(:account, all_users, current_user)
+              = user_select(:account, active_users, current_user)
           %tr
             %td
               .label #{t :category}:
