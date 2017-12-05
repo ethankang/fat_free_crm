@@ -68,7 +68,6 @@
       %dt
         .tags= tags_for_index(lead)
         %dt
-    = lead.comments.last.try(:comment)
-    - if lead.comments.size.freeze > 1
+    - if lead.comments.present?
       = render :partial => 'entities/more_comments',:locals => {:entity_model => lead}
     = hook(:lead_bottom, self, :lead => lead)

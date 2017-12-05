@@ -52,8 +52,6 @@
     - if account.tag_list.present?
       %dt
         .tags= tags_for_index(account)
-    %dt
-      = account.comments.last.try(:comment)
-      - if account.comments.size.freeze > 1
-        = render :partial => 'entities/more_comments',:locals => {:entity_model => account}
+    - if account.comments.present?
+      = render :partial => 'entities/more_comments',:locals => {:entity_model => account}
       = hook(:account_bottom, self, :account => account)
