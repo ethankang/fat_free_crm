@@ -1,0 +1,22 @@
+- comments = entity_model.comments.order('id desc').to_a
+- last_comment = comments.shift
+%ul.tools
+  %li=link_to("更多备注","javascript:volid(0)",id:entity_model.id,:onclick => "read_more(this)") if comments.present?
+
+= link_to(last_comment.user.full_name, user_path(last_comment.user)) + "," + last_comment.created_at
+.textile_auto_line= last_comment.comment
+.comments{id:  "#{entity_model.id}_comments".freeze,style: 'display:none;'}
+  - comments.each do |comment|
+    %dt.comment.highlight
+      .body
+        = link_to avatar_for(comment.user, :size => :small), user_path(comment.user)
+        = link_to(comment.user.full_name, user_path(comment.user)) + ","
+        %tt
+          = t(:added_note, value: timeago(comment.created_at) ).html_safe
+          .textile_auto_line= comment.comment
+:javascript
+  function read_more(ele){
+    var entity_id = ele.id
+    comment_show = $("#"+ entity_id + "_comments").css('display');
+    $("#" + entity_id + "_comments").css('display',comment_show == 'block' ? 'none' : 'block');
+  }

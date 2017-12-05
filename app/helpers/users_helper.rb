@@ -22,7 +22,7 @@ module UsersHelper
   end
 
   def active_users
-    User.by_name.active
+    Group.find_by_name('sales').users.active.by_name
   end
 
   def user_select(asset, users, myself)
