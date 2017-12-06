@@ -52,5 +52,6 @@
     - if account.tag_list.present?
       %dt
         .tags= tags_for_index(account)
-
-    = hook(:account_bottom, self, :account => account)
+    - if account.comments.present?
+      = render :partial => 'entities/more_comments',:locals => {:entity_model => account}
+      = hook(:account_bottom, self, :account => account)

@@ -67,5 +67,7 @@
     - if lead.tag_list.present?
       %dt
         .tags= tags_for_index(lead)
-
+        %dt
+    - if lead.comments.present?
+      = render :partial => 'entities/more_comments',:locals => {:entity_model => lead}
     = hook(:lead_bottom, self, :lead => lead)

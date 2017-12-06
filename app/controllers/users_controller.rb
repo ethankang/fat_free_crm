@@ -133,7 +133,7 @@ class UsersController < ApplicationController
 
   # 团队总线索数、总商机额整合
   def team_overview
-    @team_users = User.active
+    @team_users = Group.find_by_name('sales').users.active
     set_current_tab('team_overview')
   end
 
