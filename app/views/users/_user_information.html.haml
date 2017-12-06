@@ -13,7 +13,8 @@
     %td= Opportunity.create_or_assigned(user).not_lost.amount_sum.to_i
   %tr
     %td 当月线索数
-    %td= assigneds.where(created_at:(Time.current.beginning_of_month..Time.current.end_of_month)).size
+    - month_leads = assigneds.where(created_at:(Time.current.beginning_of_month..Time.current.end_of_month)).size
+    %td= month_leads
     %td 进行中的商机额
     %td= Opportunity.create_or_assigned(user).pipeline.amount_sum.to_i
   %tr
@@ -23,7 +24,7 @@
     %td= Opportunity.create_or_assigned(user).won.amount_sum.to_i
   %tr
     %td 当月转化率(%)
-    %td=  assigneds.size.zero? ? 0 : ((month_converteds.to_f/assigneds.size.to_f)*100).round(2)
+    %td=  month_leads.zero? ? 0 : ((month_converteds.to_f/month_leads.to_f)*100).round(2)
     %td 本月成单额
     %td= Opportunity.create_or_assigned(user).won.by_time(Time.current.beginning_of_month,Time.current.end_of_month).amount_sum.to_i
 
