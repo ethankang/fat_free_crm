@@ -27,6 +27,12 @@ module VersionsHelper
       end
     end
 
+    # version history view from user.id to user.name
+    if ['user_id','assigned_to'].include? attr_name
+      first  = User.find_by_id(first).try(:name)
+      second = User.find_by_id(second).name
+    end
+
     [label, first, second]
   end
 end

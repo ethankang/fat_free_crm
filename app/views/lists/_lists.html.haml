@@ -1,7 +1,7 @@
 - @global_lists = List.where(:user_id => nil)
 - @personal_lists = List.where(:user_id => current_user.id)
 - tab_select = ["tasks", "accounts", "leads", "contacts", "opportunities"]
-- users = User.where(suspended_at: nil)
+- users = active_users
 #lists
   = render "lists/sidebar", lists: @global_lists
   - if current_user.admin? && tab_select.include?(@current_tab)

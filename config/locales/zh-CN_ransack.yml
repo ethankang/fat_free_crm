@@ -74,8 +74,8 @@ zh-CN:
       'false': 为 false
       present: 存在
       blank: 为空
-      'null': 为 null
-      not_null: 不为 null
+      'null': 为 空
+      not_null: 不为 空
       alt:
         date:
           lt: 在之前
@@ -92,7 +92,183 @@ zh-CN:
           gteq_all: is after or on all
     models:
       lead: 线索
+      campaign: 促销
+      contact: 联系人
+      account:  公司
+      task: 任务
+      address: 地址
+      opportunity: 商机
+      email: 邮箱
+      comment: 备注
+      tag: 标签
     attributes:
       lead:
         id: ID
         user_id: 用户
+        campaign_id: 促销
+        assigned_to: 线索授予
+        first_name: 名字
+        last_name: 姓氏
+        access: 共享Lead用户
+        company: 公司
+        source: 来源
+        status: 状态
+        referenced_by:
+        do_not_call: 不要打电话
+        phone: 电话
+        mobile: 手机
+        email: 邮箱
+        alt_email: 另一个 email
+        rating: 星级
+        created_at: 创建时间
+        updated_at: 更新时间
+        deleted_at: 删除时间
+        converted_at: 转换时间
+        converted_operate_id: 转换操作人
+        background_info: 背景
+      campaign:
+        id: ID
+        user_id: 用户
+        assigned_to: 授予
+        name: 姓名
+        access: 共享促销活动用户
+        status: 状态
+        budget: 预算
+        target_leads: 目标线索
+        target_conversion: 目标转换
+        target_revenue: 目标收入
+        leads_count: 实际线索
+        opportunities_count:
+        revenue: 实际收入
+        starts_on: 开始时间
+        ends_on: 结束时间
+        objectives: 目标
+        deleted_at: 删除时间
+        created_at: 创建时间
+        updated_at: 更新时间
+        background_info: 背景
+      contact:
+        id: ID
+        user_id: 用户
+        lead_id: 线索
+        assigned_to: 授予
+        reports_to: 报告给
+        first_name: 名字
+        last_name: 姓氏
+        access: 共享联系人用户
+        title: 标题
+        department: 部门
+        source: 来源
+        email: 邮箱
+        alt_email: 另一个 email
+        phone: 电话
+        mobile: 手机
+        fax: 传真
+        blog:
+        linkedin:
+        facebook:
+        twitter:
+        born_on: 出生于
+        do_not_call: 不要打电话
+        deleted_at: 删除时间
+        created_at: 创建时间
+        updated_at: 更新时间
+        background_info: 背景信息
+        skype: Skype
+      task:
+        id: ID
+        user_id: 用户
+        assigned_to: 授予
+        completed_by: 由 %{user} 完成
+        name: 姓名
+        priority: 优先
+        category: 类别
+        bucket: 期限
+        due_at: 到期时间
+        completed_at: 完成时间
+        deleted_at: 删除时间
+        created_at: 创建时间
+        updated_at: 更新时间
+        background_info: 背景
+      address:
+        id: ID
+        street1: 街道1
+        street2: 街道2
+        city: 城市
+        state: 状态
+        zipcode: 邮编
+        country: 国家
+        full_address: 详细地址
+        address_type: 地址类型
+        created_at: 创建时间
+        updated_at: 更新时间
+        deleted_at: 删除时间
+      email:
+        imap_message_id: IMAP邮件
+        user_id: 用户
+        sent_from: 发件人
+        sent_to: 收件人
+        cc: 抄送
+        bcc: 暗抄送
+        subject: 标题
+        body: 内容
+        header: 邮件头信息
+        sent_at: 发送时间
+        received_at: 接收时间
+        deleted_at: 删除时间
+        created_at: 创建时间
+        updated_at: 更新时间
+        state: 状态
+      comment:
+        user_id: 用户
+        private:  是否保持私有
+        title: 标题
+        comment: 备注
+        created_at: 创建时间
+        updated_at: 更新时间
+        state: 状态
+      tag:
+        name: 标签名
+        taggings_count:
+      account:
+        id: ID
+        user_id: 用户
+        assigned_to: 授予
+        name: 名称
+        access:  共享账号用户
+        website: 网站
+        toll_free_phone: 免费电话
+        phone: 电话
+        fax: 传真
+        deleted_at: 删除时间
+        created_at: 创建时间
+        updated_at: 更新时间
+        email: 邮件
+        background_info: 背景
+        rating: 星级
+        category: 类型
+      opportunity:
+        id: ID
+        user_id: 用户
+        campaign_id: 促销
+        assigned_to: 授予
+        name: 名称
+        access: 共享商机用户
+        source: 来源
+        stage: 商机阶段
+        probability: 可能性
+        amount: 金额
+        discount: 折扣
+        closes_on: 结束日期
+        deleted_at: 删除时间
+        created_at: 创建时间
+        updated_at: 更新时间
+        background_info: 背景
+
+
+
+
+
+
+
+
