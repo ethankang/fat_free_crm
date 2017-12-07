@@ -317,7 +317,7 @@ campaign_status_color:
 #------------------------------------------------------------------------------
 lead_status:
   - :new
-#   - :contacted
+  - :contacted
   - :converted
   - :duplicated
   - :contact_later
@@ -326,7 +326,7 @@ lead_status:
 
 lead_status_color:
   :new       : Turquoise
-  :contacted : Silver
+  :contacted : Lime
   :converted : YellowGreen
   :contact_later : Yellow
   :duplicated : OrangeRed
