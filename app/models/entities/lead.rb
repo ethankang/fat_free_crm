@@ -63,6 +63,7 @@ class Lead < ActiveRecord::Base
 
   scope :text_search, ->(query) { search('first_name_or_last_name_or_company_or_email_or_phone_cont' => query).result }
 
+  scope :create_or_assigned, -> (user){ where('user_id = ? or assigned_to = ?', user.id,user.id) }
   uses_user_permissions
   acts_as_commentable
   uses_comment_extensions
@@ -93,6 +94,19 @@ class Lead < ActiveRecord::Base
 
   def self.first_name_position
     "before"
+  end
+
+  # 更改某用户下所有线索、转化线索后公司以及联系人 所属人
+  #----------------------------------------------------------------------------
+  def self.change_leads_owner(from_user_leads,to_user_id)
+    from_user_leads.each do |lead|
+      transaction do
+        lead.update_attributes!(:assigned_to => to_user_id)
+        next if lead.contact.blank?
+        lead.contact.account.update_attributes!(:assigned_to => to_user_id)
+        lead.contact.update_attributes!(:assigned_to => to_user_id)
+      end
+    end
   end
 
   # Save the lead along with its permissions.
