@@ -15,6 +15,7 @@ $color_hover_tab_background: #97baff;
 $size_tab_height: 26px;
 $size_tab_width: 80px;
 $color_footer: grey;
+$max-width:500px;
 
 // Header, tabs, and footer.
 //------------------------------------------------------------------------------
@@ -70,7 +71,7 @@ $color_footer: grey;
     input {
       margin: 2px 0px 0px 0px; } } }
 
-.tabs {
+.tabs{
   background: $color_header_background;
   height: $size_tab_height;
   padding: 0px;
@@ -113,6 +114,39 @@ $color_footer: grey;
     background: $color_active_tab_background;
     color: $color_active_tab;
     text-decoration: none; } }
+.float_left{
+  float:left;
+  display:inline-block;
+}
+
+@media screen and (max-width: $max-width) {
+ .tabs {
+    height:auto;
+    ul{
+      margin: 0;
+      padding: 0;
+      li{
+        margin_top:1px;
+        width:430px;
+        position: static;
+        line-height: 20px;
+        list-style: none;
+        text-align: center;
+
+        a:hover {
+          background: $color_hover_tab_background;
+          color: $color_hover_tab; }
+        a:link,a:link.active, a:visited.active {
+          background: $color_active_tab_background;
+          color: $color_active_tab;
+          text-decoration: none;
+          width:430px;
+        }
+      }
+    }
+  }
+
+}
 
 #footer {
   color: $color_footer;

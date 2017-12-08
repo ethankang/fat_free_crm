@@ -5,8 +5,9 @@
 //------------------------------------------------------------------------------
 $color_title: #342d7e;
 $color_subtitle: darkslateblue;
-$sidebar_width: 210px;
+$sidebar_width: 20%;
 
+$max-width: 500px;
 // Common page elements.
 //------------------------------------------------------------------------------
 .title {
@@ -99,23 +100,60 @@ $sidebar_width: 210px;
 .tabbed {
   padding: 12px 12px 12px 16px; }
 
+
 .main {
   background: white;
   padding: 8px 15px 15px 15px;
   -moz-border-radius: 4px;
   -moz-box-shadow: 2px 2px 8px #bbbbbb, -2px 0px 8px #bbbbbb;
   -webkit-border-radius: 4px;
-  -webkit-box-shadow: 2px 2px 8px #bbbbbb, -2px 0px 8px #bbbbbb; }
+  -webkit-box-shadow: 2px 2px 8px #bbbbbb, -2px 0px 8px #bbbbbb;
+  overflow:hidden;
+  width:75%;
+  height:75%;
+}
 
 .info {
   padding-top: 12px;
   width: 700px; }
+@media screen and (max-width: $max-width) {
 
+  .indent{
+    word-wrap: break-word;
+    dt{
+      display:block;
+      overflow:hidden;
+    }
+  }
+  .tabbed{
+    padding:0px;
+
+    .main, div.sidebar{
+      width:100%;
+    }
+    .float_left{
+      float:none;
+      #lists,#recently{
+        display:none;
+      }
+    }
+  }
+  .list .strip{
+    width:50px;
+  }
+  .list .indent{
+    margin-left:5px;
+  }
+
+
+}
 .sidebar {
   color: #3f3f3f;
   font-size: 11px;
   padding: 0px 12px 0px 0px;
-  width: $sidebar_width; }
+  width: $sidebar_width;
+  height:auto;
+}
 
 .form {
   background: white;
@@ -763,3 +801,4 @@ table.asset_attributes {
     background-color: darkgray;
   }
 }
+
