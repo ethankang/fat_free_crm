@@ -57,6 +57,7 @@ class Lead < ActiveRecord::Base
     where(['status IN (?)' + (filters.delete('other') ? ' OR status IS NULL' : ''), filters])
   }
   scope :converted,    ->       { where(status: 'converted') }
+  scope :new_lead,    ->       { where(status: 'new') }
   scope :for_campaign, ->(id)   { where(campaign_id: id) }
   scope :created_by,   ->(user) { where(user_id: user.id) }
   scope :assigned_to,  ->(user) { where(assigned_to: user.id) }
@@ -195,6 +196,36 @@ class Lead < ActiveRecord::Base
 
   def notify_admins
     UserMailer.new_lead_notification(self).deliver_now
+  end
+
+  def self.send_sales_ding_ids(role)
+    Rails.cache.read("group_users_#{role}") ||  Group.find_by_name(role).users.active
+    Rails.cache.write("group_users_#{role}",group_users,expires_in: 1.day)
+    group_users.map{|sale|
+      sale.dingid if sale.is_received && new_lead.assigned_to(sale).present?
+    }
+  end
+
+  def self.customer_server_remind
+    customer = User.find_by_id(Setting.default_user_id)
+    sales_manager = User.find_by_id(Setting.sales_manager)
+    leads = new_lead.assigned_to(customer)
+    return if leads.blank?
+
+    Dingtalk.message_api.text_msg(
+        I18n.t(:customer_server_remind_msg),
+        sales_manager.dingid
+    )
+  end
+
+  def self.sales_remind
+    send_dinds = send_sales_ding_ids(Setting.sales_group_name)
+    return if send_dinds.blank?
+
+    Dingtalk.message_api.text_msg(
+        I18n.t(:sale_new_leadremind_msg),
+        send_dinds
+    )
   end
 
   # 该lead创建时发送消息

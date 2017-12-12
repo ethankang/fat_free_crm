@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171130052619) do
+ActiveRecord::Schema.define(version: 20171211094338) do
 
   create_table "account_contacts", force: :cascade do |t|
     t.integer  "account_id", limit: 4
@@ -432,6 +432,7 @@ ActiveRecord::Schema.define(version: 20171130052619) do
     t.datetime "suspended_at"
     t.string   "single_access_token", limit: 255
     t.string   "dingid",              limit: 255
+    t.boolean  "is_received",                     default: true
   end
 
   add_index "users", ["dingid"], name: "index_users_on_dingid", using: :btree

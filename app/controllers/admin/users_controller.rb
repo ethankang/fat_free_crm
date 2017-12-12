@@ -125,6 +125,7 @@ class Admin::UsersController < Admin::ApplicationController
       :skype,
       :password,
       :password_confirmation,
+      :is_received,
       group_ids: []
     )
   end

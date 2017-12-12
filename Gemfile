@@ -87,3 +87,4 @@ gem 'gollum', '~> 4.1', '>= 4.1.1'
 gem 'gollum-rugged_adapter', '~> 0.4.4'
 gem 'github-markdown', '~> 0.6.9'
 gem 'http', '~> 3.0'
+gem 'whenever',:require => false
