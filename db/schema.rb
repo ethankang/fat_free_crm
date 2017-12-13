@@ -432,7 +432,7 @@ ActiveRecord::Schema.define(version: 20171211094338) do
     t.datetime "suspended_at"
     t.string   "single_access_token", limit: 255
     t.string   "dingid",              limit: 255
-    t.boolean  "is_received",                     default: true
+    t.boolean  "ding_enabled",                    default: true
   end
 
   add_index "users", ["dingid"], name: "index_users_on_dingid", using: :btree

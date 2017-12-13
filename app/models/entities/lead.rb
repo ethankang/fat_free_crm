@@ -198,34 +198,27 @@ class Lead < ActiveRecord::Base
     UserMailer.new_lead_notification(self).deliver_now
   end
 
-  def self.send_sales_ding_ids(role)
-    Rails.cache.read("group_users_#{role}") ||  Group.find_by_name(role).users.active
-    Rails.cache.write("group_users_#{role}",group_users,expires_in: 1.day)
-    group_users.map{|sale|
-      sale.dingid if sale.is_received && new_lead.assigned_to(sale).present?
+  # 获取未处理新线索的销售群组人员钉钉ID
+  def self.sales_ding_ids(group_name)
+    group_users =  Group.find_by_name(group_name).users.active
+    group_users.map{|user|
+      user.dingid if user.ding_enabled && new_lead.assigned_to(user).present?
     }
   end
 
-  def self.customer_server_remind
-    customer = User.find_by_id(Setting.default_user_id)
-    sales_manager = User.find_by_id(Setting.sales_manager)
-    leads = new_lead.assigned_to(customer)
-    return if leads.blank?
-
-    Dingtalk.message_api.text_msg(
-        I18n.t(:customer_server_remind_msg),
-        sales_manager.dingid
-    )
+  # 客服有未处理的新线索 发送钉钉通知销售经理
+  def self.ding_sales_manager
+    unassigned_new_leads = new_lead.where(assigned_to: Setting.default_user_id)
+    if unassigned_new_leads.present?
+      sales_manager_dingid = User.select(:dingid).find(Setting.sales_manager)
+      Dingtalk.message_api.text_msg(I18n.t(:customer_server_remind_msg),sales_manager_dingid)
+    end
   end
 
-  def self.sales_remind
-    send_dinds = send_sales_ding_ids(Setting.sales_group_name)
-    return if send_dinds.blank?
-
-    Dingtalk.message_api.text_msg(
-        I18n.t(:sale_new_leadremind_msg),
-        send_dinds
-    )
+  # 销售人员有未处理的新线索 发送钉钉通知
+  def self.ding_sales
+    dingids = sales_ding_ids(Setting.sales_group_name)
+    Dingtalk.message_api.text_msg(I18n.t(:sale_new_leadremind_msg),dingids) if dingids.present?
   end
 
   # 该lead创建时发送消息

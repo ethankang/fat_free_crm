@@ -305,7 +305,7 @@ zh-CN:
   password: 密码
   password_confirmation: 确认新密码
   phone: 电话
-  is_received: 接收钉钉提醒
+  ding_enabled: 接收钉钉提醒
   profile: 个人设置
   profile_language: 语言
   save_profile: 保存个人设置

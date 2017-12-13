@@ -24,9 +24,9 @@
           = f.check_box(:admin, { :disabled => edit && @user == current_user })
           %label{:for => 'user_admin'}
             = t(:user_is_admin)
-          = f.check_box :is_received
+          = f.check_box :ding_enabled
           %label{:for => 'user_admin'}
-            = t(:is_received)
+            = t(:ding_enabled)
 
 .subtitle #{t :personal_information}
 .section
