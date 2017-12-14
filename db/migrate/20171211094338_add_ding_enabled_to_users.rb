@@ -1,4 +1,4 @@
-class AddIsReceviedToUsers < ActiveRecord::Migration
+class AddDingEnabledToUsers < ActiveRecord::Migration
   def change
     add_column :users,:ding_enabled,:boolean,:default => true
   end

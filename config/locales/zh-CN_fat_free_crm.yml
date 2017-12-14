@@ -235,8 +235,8 @@ zh-CN:
                                         公司：%{company}\n
                                         来源：%{source}\n
                                         详情：%{url}"
-  customer_server_remind_msg: 您有新线索未分配
-  sale_new_leadremind_msg: 您有新线索未处理
+  ding_sales_manager_msg: 您有新线索未分配
+  ding_sales_msg: 您有新线索未处理
 
   # Options.
   #----------------------------------------------------------------------------
