@@ -235,8 +235,8 @@ zh-CN:
                                         公司：%{company}\n
                                         来源：%{source}\n
                                         详情：%{url}"
-  ding_sales_manager_msg: 您有新线索未分配
-  ding_sales_msg: 您有新线索未处理
+  ding_sales_manager_msg: "您有新线索未分配,点此查看详情:%{url}"
+  ding_sales_msg: "您有新线索未处理,点此查看详情: %{url}"
 
   # Options.
   #----------------------------------------------------------------------------
