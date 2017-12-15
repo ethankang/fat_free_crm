@@ -341,7 +341,7 @@ lead_source:
   - :campaign
   - :conference
   - :referral
-  - :search
+  - :web_search
   - :other
 
 # Opportunity Stage.
