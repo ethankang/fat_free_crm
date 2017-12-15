@@ -201,9 +201,9 @@ class Lead < ActiveRecord::Base
   # 获取未处理新线索的销售群组人员钉钉ID
   def self.sales_ding_ids(group_name)
     group_users =  Group.find_by_name(group_name).users.active
-    group_users.map{|user|
+    group_users.select{|user|
       user.dingid if user.ding_enabled && new_lead.assigned_to(user).present?
-    }
+   }.map(&:name)
   end
 
   # 客服有未处理的新线索 发送钉钉通知销售经理
