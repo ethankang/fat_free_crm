@@ -202,8 +202,8 @@ class Lead < ActiveRecord::Base
   def self.sales_ding_ids(group_name)
     group_users =  Group.find_by_name(group_name).users.active
     group_users.select{|user|
-      user.dingid if user.ding_enabled && new_lead.assigned_to(user).present?
-   }.map(&:name)
+       user.ding_enabled && new_lead.assigned_to(user).present?
+   }.map(&:dingid)
   end
 
   # 客服有未处理的新线索 发送钉钉通知销售经理
