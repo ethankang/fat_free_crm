@@ -57,6 +57,7 @@ class Lead < ActiveRecord::Base
     where(['status IN (?)' + (filters.delete('other') ? ' OR status IS NULL' : ''), filters])
   }
   scope :converted,    ->       { where(status: 'converted') }
+  scope :new_lead,    ->       { where(status: 'new') }
   scope :for_campaign, ->(id)   { where(campaign_id: id) }
   scope :created_by,   ->(user) { where(user_id: user.id) }
   scope :assigned_to,  ->(user) { where(assigned_to: user.id) }
@@ -195,6 +196,29 @@ class Lead < ActiveRecord::Base
 
   def notify_admins
     UserMailer.new_lead_notification(self).deliver_now
+  end
+
+  # 获取未处理新线索的销售群组人员钉钉ID
+  def self.sales_ding_ids(group_name)
+    group_users =  Group.find_by_name(group_name).users.active
+    group_users.map{|user|
+      user.dingid if user.ding_enabled && new_lead.assigned_to(user).present?
+    }
+  end
+
+  # 客服有未处理的新线索 发送钉钉通知销售经理
+  def self.ding_sales_manager
+    unassigned_new_leads = new_lead.where(assigned_to: Setting.default_user_id)
+    if unassigned_new_leads.present?
+      sales_manager_dingid = User.select(:dingid).find(Setting.sales_manager)
+      Dingtalk.message_api.text_msg(I18n.t(:ding_sales_manager_msg),sales_manager_dingid)
+    end
+  end
+
+  # 销售人员有未处理的新线索 发送钉钉通知
+  def self.ding_sales
+    dingids = sales_ding_ids(Setting.sales_group_name)
+    Dingtalk.message_api.text_msg(I18n.t(:ding_sales_msg),dingids) if dingids.present?
   end
 
   # 该lead创建时发送消息

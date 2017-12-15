@@ -235,6 +235,8 @@ zh-CN:
                                         公司：%{company}\n
                                         来源：%{source}\n
                                         详情：%{url}"
+  ding_sales_manager_msg: 您有新线索未分配
+  ding_sales_msg: 您有新线索未处理
 
   # Options.
   #----------------------------------------------------------------------------
@@ -303,6 +305,7 @@ zh-CN:
   password: 密码
   password_confirmation: 确认新密码
   phone: 电话
+  ding_enabled: 接收钉钉提醒
   profile: 个人设置
   profile_language: 语言
   save_profile: 保存个人设置

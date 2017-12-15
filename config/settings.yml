@@ -399,3 +399,7 @@ task_completed:
   - :completed_last_week
   - :completed_this_month
   - :completed_last_month
+
+sales_group_name: "sales"
+default_user_id: 2
+sales_manager: 4
