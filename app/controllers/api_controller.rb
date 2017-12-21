@@ -18,7 +18,7 @@ class ApiController < ActionController::Base
         user_id: user_id,
         status: :new,
         access: "Private",
-        source: :web,
+        source: params[:source] || :web,
         first_name: params[:name],
         company: params[:company],
         phone: params[:phone],
