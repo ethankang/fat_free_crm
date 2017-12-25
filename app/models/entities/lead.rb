@@ -208,7 +208,7 @@ class Lead < ActiveRecord::Base
 
   # 客服有未处理的新线索 发送钉钉通知销售经理
   def self.ding_sales_manager
-    unassigned_new_leads = new_lead.where(assigned_to: Setting.default_user_id)
+    unassigned_new_leads = new_lead.where(assigned_to: [Setting.default_user_id, nil])
     if unassigned_new_leads.present?
       sales_manager_dingid = User.select(:dingid).find(Setting.sales_manager)
       Dingtalk.message_api.text_msg(I18n.t(:ding_sales_manager_msg,url:Rails.application.routes.url_helpers.leads_url),sales_manager_dingid)
