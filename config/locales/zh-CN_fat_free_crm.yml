@@ -22,7 +22,7 @@ zh-CN:
   tab_tasks: 任务
   tab_campaigns: 促销
   tab_leads: 线索
-  tab_accounts: 公司
+  tab_accounts: 客户
   tab_contacts: 联系人
   tab_opportunities: 商机
   tab_team: 团队
@@ -65,7 +65,7 @@ zh-CN:
   planning: 已试用
   contract: 已出合同
   won: 赢单
-  lost: 丢单
+  lost: 关单
 
   call: 电话
   email: Email
