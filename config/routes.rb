@@ -62,7 +62,11 @@ Rails.application.routes.draw do
   post '/home/redraw',   as: :redraw
 
   resource :authentication, except: [:index, :edit]
-  resources :comments,       except: [:new, :show]
+  resources :comments,       except: [:new, :show] do
+    collection do
+      get :redraw
+    end
+  end
   resources :emails,         only: [:destroy]
   resources :passwords,      only: [:new, :create, :edit, :update]
 

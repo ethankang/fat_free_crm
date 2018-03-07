@@ -23,6 +23,7 @@ zh-CN:
   tab_campaigns: 促销
   tab_leads: 线索
   tab_accounts: 客户
+  tab_comments: 跟进记录
   tab_contacts: 联系人
   tab_opportunities: 商机
   tab_team: 团队
@@ -332,7 +333,7 @@ zh-CN:
 
   # Views -> Accounts.
   #----------------------------------------------------------------------------
-  account: 公司
+  account: 客户
   account_id: 公司
   select_an_account: 选择公司
   account_small: 公司
@@ -341,6 +342,7 @@ zh-CN:
   accounts: 公司
   accounts_options: 公司选项
   accounts_small: 短公司
+  comments: 备注
   assigned_to: 授予
   billing_address: 账单地址
   create_account: 创建公司

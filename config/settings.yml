@@ -234,6 +234,11 @@
   :icon: :fa-money
   :url:
     :controller: opportunities
+- :active: false
+  :text: :tab_comments
+  :icon: :fa-comment
+  :url:
+    :controller: comments
 # - :active: false
 #   :text: :tab_team
 #   :icon: :fa-globe
