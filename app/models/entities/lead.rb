@@ -38,7 +38,7 @@
 
 class Lead < ActiveRecord::Base
   # 给钉钉发消息的账户IDS
-  USERIDS_FOR_DINGTALK_MSG = [4, 5]
+  USERIDS_FOR_DINGTALK_MSG = [5]
 
   belongs_to :user
   belongs_to :campaign
