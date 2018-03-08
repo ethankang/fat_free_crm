@@ -26,7 +26,7 @@ class Ability
 
       # Entities
       can :manage, entities, access: 'Public'
-      can :manage, entities + [Task], user_id: user.id
+      can :manage, entities + [Comment, Task], user_id: user.id
       can :manage, entities + [Task], assigned_to: user.id
       cannot :destroy, entities
 
@@ -46,7 +46,7 @@ class Ability
           scope = scope.or(t[:group_id].eq_any(group_ids))
         end
 
-        entities.each do |klass|
+        (entities + [Comment]).each do |klass|
           if (asset_ids = Permission.where(scope.and(t[:asset_type].eq(klass.name))).pluck(:asset_id)).any?
             can :manage, klass, id: asset_ids
           end

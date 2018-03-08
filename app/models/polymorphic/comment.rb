@@ -24,6 +24,11 @@ class Comment < ActiveRecord::Base
   belongs_to :commentable, polymorphic: true
 
   scope :created_by, ->(user) { where(user_id: user.id) }
+  scope :text_search, ->(query) { search('comment_cont' => query).result }
+
+  sortable by: ["created_at DESC", "updated_at DESC"], default: "created_at DESC"
+  has_ransackable_associations %w(user)
+  ransack_can_autocomplete
 
   validates_presence_of :user, :commentable, :comment
   has_paper_trail class_name: 'Version', meta: { related: :commentable },
@@ -32,6 +37,12 @@ class Comment < ActiveRecord::Base
   before_create :subscribe_mentioned_users
   # 通知邮件总是发送失败，暂时停用
 #   after_create :subscribe_user_to_entity, :notify_subscribers
+
+  # Default values provided through class methods.
+  #----------------------------------------------------------------------------
+  def self.per_page
+    20
+  end
 
   def expanded?
     state == "Expanded"

@@ -1,0 +1,13 @@
+= styles_for :comment
+= styles_for :opportunity
+
+.remote#create_comment{ hidden }
+
+= render 'search'
+
+.remote#options{ hidden }
+
+.list#comments
+  = render @comments
+
+#paginate= render "shared/paginate_with_per_page"
