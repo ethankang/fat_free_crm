@@ -285,18 +285,18 @@
 #
 #------------------------------------------------------------------------------
 account_category:
-  - :customer
-  - :agency
-  - :reseller
-  - :agency_customer
-  - :partner
+  - :prospect
+  - :important
+  - :won_account
+  - :abeyance
+  - :redevelop
 
 account_category_color:
-  :agency_customer  : paleturquoise
-  :customer    : YellowGreen
-  :partner     : bisque
-  :reseller    : thistle
-  :agency      : skyblue
+  :prospect : Turquoise
+  :important : OrangeRed
+  :won_account : YellowGreen
+  :abeyance : Gainsboro
+  :redevelop : Yellow
 
 # Campaign Status. To add custom status use string value, for example:
 #
@@ -334,9 +334,9 @@ lead_status_color:
   :contacted : Lime
   :converted : YellowGreen
   :contact_later : Yellow
-  :duplicated : OrangeRed
+  :duplicated : LightGrey
   :abeyance : Gainsboro
-  :rejected  : OrangeRed
+  :rejected  : LightGrey
 
 lead_source:
   - :web

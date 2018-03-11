@@ -22,8 +22,8 @@
               .label #{t :category}:
               = select_tag("account[category]",
                 options_for_select(Setting.unroll(:account_category)),
-                { :selected => (@account.category || "other").to_sym,
-                :include_blank => t(:other), :style => "width:160px" })
+                { :selected => @account.category.try(:to_sym),
+                :include_blank => false, :style => "width:160px" })
             %td= spacer
             %td
               .label #{t :rating}:

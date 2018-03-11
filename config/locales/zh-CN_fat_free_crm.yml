@@ -39,6 +39,11 @@ zh-CN:
   reseller: 中间商
   agency: 代理商
   agency_customer: 代理商的客户
+  important : 重点客户
+  prospect : 意向客户
+  won_account : 成单客户
+  abeyance : 搁置
+  redevelop : 再开发
   vendor: 工厂
   planned: 计划
   started: 已开始
