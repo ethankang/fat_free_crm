@@ -179,6 +179,8 @@ Rails.application.routes.draw do
     member do
       put :complete
       put :uncomplete
+      get :comment_complete
+      post :update_comment_complete
     end
   end
 

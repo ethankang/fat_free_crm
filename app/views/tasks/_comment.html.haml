@@ -1,0 +1,14 @@
+- id_prefix = "task_#{@task.id}"
+- @comment = @comment || Comment.new
+
+.remote.comment
+  = simple_form_for(@comment, url: [:update_comment_complete, @task], :html => one_submit_only, :remote => true) do |f|
+    = link_to_close comment_complete_task_path(@task)
+
+    = hidden_field_tag :view, @view
+    = f.text_area :comment, :id => "#{id_prefix}_comment_comment"
+
+    .buttonbar
+      = f.submit t :complete_task
+      == #{t :or}
+      = link_to_cancel comment_complete_task_path(@task)

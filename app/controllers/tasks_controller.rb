@@ -174,6 +174,40 @@ class TasksController < ApplicationController
     end
   end
 
+  def comment_complete
+    @view = view
+    @task = Task.tracked_by(current_user).find(params[:id])
+    @bucket = Setting.unroll(:task_bucket)[1..-1] << [t(:due_specific_date, default: 'On Specific Date...'), :specific_time]
+    @category = Setting.unroll(:task_category)
+    @asset = @task.asset if @task.asset_id?
+
+    @comment = Comment.new
+  end
+
+  def update_comment_complete
+    @task = Task.tracked_by(current_user).find(params[:id])
+
+    @comment = Comment.new(
+      comment_params.merge(
+        user_id: current_user.id,
+        commentable_id: @task.asset.id,
+        commentable_type: @task.asset.class.name
+      )
+    )
+    if @comment.save
+      @task.update_attributes(completed_at: Time.now, completed_by: current_user.id) if @task
+
+      # Make sure bucket's div gets hidden if we're deleting last task in the bucket.
+      if Task.bucket_empty?(params[:bucket], current_user, @view)
+        @empty_bucket = params[:bucket]
+      end
+
+      update_sidebar
+    end
+
+    render 'comment_completed'
+  end
+
   protected
 
   def task_params
@@ -222,5 +256,9 @@ class TasksController < ApplicationController
     view = params[:view]
     views = Task::ALLOWED_VIEWS
     views.include?(view) ? view : views.first
+  end
+
+  def comment_params
+    params[:comment].permit(:comment)
   end
 end

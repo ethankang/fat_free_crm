@@ -37,6 +37,11 @@ module TasksHelper
             method: :get, remote: true)
   end
 
+  def link_to_task_comment_complete(task, bucket)
+    link_to('完成', comment_complete_task_path(task, bucket: bucket, view: @view, previous: "crm.find_form('edit_task')"),
+            method: :get, remote: true)
+  end
+
   #----------------------------------------------------------------------------
   def link_to_task_delete(task, bucket)
     link_to(t(:delete) + "!", task_path(task, bucket: bucket, view: @view),

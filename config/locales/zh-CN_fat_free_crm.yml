@@ -546,6 +546,7 @@ zh-CN:
   category: 类别
   completed_tab: 已完成
   completed_tasks: 已完成任务
+  complete_task: 完成任务
   create_task: 创建任务
   create_task_small: 创建新任务
   due: 期限
