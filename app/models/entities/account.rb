@@ -77,6 +77,7 @@ class Account < ActiveRecord::Base
   validate :users_for_shared_access
 
   before_save :nullify_blank_category
+  after_update :update_associations, if: :assigned_to_changed?
 
   # Default values provided through class methods.
   #----------------------------------------------------------------------------
@@ -136,6 +137,18 @@ class Account < ActiveRecord::Base
 
   def nullify_blank_category
     self.category = nil if category.blank?
+  end
+
+  # 分配一个客户给销售时，同步将客户的联系人，商机，任务同步转移
+  def update_associations
+    if assignee
+      # 更新所有的联系人(contacts)
+      contacts.update_all(assigned_to: assigned_to)
+      # 更新所有的商机(opportunities)
+      opportunities.update_all(assigned_to: assigned_to)
+      # 更新所有的任务(tasks)
+      tasks.update_all(assigned_to: assigned_to)
+    end
   end
 
   ActiveSupport.run_load_hooks(:fat_free_crm_account, self)
