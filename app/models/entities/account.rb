@@ -44,7 +44,7 @@ class Account < ActiveRecord::Base
   accepts_nested_attributes_for :shipping_address, allow_destroy: true, reject_if: proc { |attributes| Address.reject_address(attributes) }
 
   scope :state, ->(filters) {
-    where('category IN (?)' + (filters.delete('other') ? ' OR category IS NULL' : ''), filters)
+    where('accounts.category IN (?)' + (filters.delete('other') ? ' OR accounts.category IS NULL' : ''), filters)
   }
   scope :created_by,  ->(user) { where(user_id: user.id) }
   scope :assigned_to, ->(user) { where(assigned_to: user.id) }
