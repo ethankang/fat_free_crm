@@ -61,7 +61,7 @@ class Account < ActiveRecord::Base
   # 查询出必须有pening的tasks的account,但是没有tasks或者tasks为pending的总数是0的accounts
   scope :requared_tasks_no_task, -> {
     joins("left join tasks ON tasks.asset_id = accounts.id AND tasks.asset_type = 'Account'").
-      where(category: Setting[:tasks_required_category]).
+      where('accounts.category IN (?)', Setting[:tasks_required_category]).
       group('accounts.id').
       having('count(tasks.id) = 0 OR count(accounts.id) = count(tasks.completed_at)')
   }
