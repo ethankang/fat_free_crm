@@ -17,6 +17,24 @@ class AccountsController < EntitiesController
     end
   end
 
+  def tasks_required
+    set_options
+
+    per_page =
+      if params[:per_page]
+        params[:per_page] == 'all' ? @search_results_count : params[:per_page]
+      else
+        current_user.pref[:"#{controller_name}_per_page"]
+      end
+
+    @accounts = entities.merge(ransack_search.result(distinct: true)). requared_tasks_no_task
+    @search_results_count = @accounts.length
+
+    @accounts = @accounts.paginate(page: current_page, per_page: per_page)
+
+    render :index
+  end
+
   # GET /accounts/1
   # AJAX /accounts/1
   #----------------------------------------------------------------------------

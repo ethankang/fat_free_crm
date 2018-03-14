@@ -290,6 +290,10 @@ account_category:
   - :won_account
   - :abeyance
   - :redevelop
+tasks_required_category:
+  - :prospect
+  - :won_account
+  - :important
 
 account_category_color:
   :prospect : Turquoise

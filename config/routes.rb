@@ -72,6 +72,7 @@ Rails.application.routes.draw do
 
   resources :accounts, id: /\d+/ do
     collection do
+      get :tasks_required
       get :advanced_search
       post :filter
       get :options

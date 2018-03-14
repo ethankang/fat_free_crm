@@ -344,13 +344,13 @@ zh-CN:
   account_small: 公司
   account_summary: 公司摘要
   account_categories: 公司类别
-  accounts: 公司
+  accounts: 客户
   accounts_options: 公司选项
   accounts_small: 短公司
   comments: 备注
   assigned_to: 授予
   billing_address: 账单地址
-  create_account: 创建公司
+  create_account: 创建客户
   date_created: 创建日期
   date_updated: 更新日期
   fax: 传真
