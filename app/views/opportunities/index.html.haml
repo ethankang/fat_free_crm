@@ -7,19 +7,19 @@
     %td
       总商机额
       .number
-        =Opportunity.assigned_to(current_user).not_lost.amount_sum.to_i
+        =Opportunity.create_or_assigned(current_user).not_lost.amount_sum.to_i
     %td
       进行中的商机额
       .number
-        =Opportunity.assigned_to(current_user).pipeline.amount_sum.to_i
+        =Opportunity.create_or_assigned(current_user).pipeline.amount_sum.to_i
     %td
       总成单额
       .number
-        =Opportunity.assigned_to(current_user).won.amount_sum.to_i
+        =Opportunity.create_or_assigned(current_user).won.amount_sum.to_i
     %td
       本月成单额
       .number
-        =Opportunity.assigned_to(current_user).won.where(closes_on: (Time.current.beginning_of_month..Time.current.end_of_month)).amount_sum.to_i
+        =Opportunity.create_or_assigned(current_user).won.where(closes_on: (Time.current.beginning_of_month..Time.current.end_of_month)).amount_sum.to_i
 
 .remote#create_opportunity{ hidden }
 
