@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171211094338) do
+ActiveRecord::Schema.define(version: 20180315064454) do
 
   create_table "account_contacts", force: :cascade do |t|
     t.integer  "account_id", limit: 4
@@ -399,6 +399,7 @@ ActiveRecord::Schema.define(version: 20171211094338) do
     t.text     "subscribed_users", limit: 65535
   end
 
+  add_index "tasks", ["asset_id", "asset_type"], name: "index_tasks_on_asset_id_and_asset_type", using: :btree
   add_index "tasks", ["assigned_to"], name: "index_tasks_on_assigned_to", using: :btree
   add_index "tasks", ["user_id", "name", "deleted_at"], name: "index_tasks_on_user_id_and_name_and_deleted_at", unique: true, using: :btree
 
