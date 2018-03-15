@@ -5,7 +5,7 @@
   -# default view
 
   = styles_for :task, :opportunity
-  
+
   = render 'contacts/title_bar', :contact => @contact
 
   = render "comments/new", :commentable => @contact
@@ -13,10 +13,10 @@
 
   = hook(:show_contact_bottom, self, {entity: @contact}) do
 
-    = render :partial => "tasks/tasks", :locals => {:object => @contact}
+    -# = render :partial => "tasks/tasks", :locals => {:object => @contact}
 
     = render :partial => "opportunities/opportunities", :locals => {:object => @contact}
-    
+
     = render :partial => "versions/versions", :locals => {:object => @contact}
 
     = load_select_popups_for(@contact, :tasks, :opportunities)

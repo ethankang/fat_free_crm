@@ -13,7 +13,7 @@
 
   = hook(:show_opportunity_bottom, self, {entity: @opportunity}) do
 
-    = render "tasks/tasks", :object => @opportunity
+    -# = render "tasks/tasks", :object => @opportunity
 
     = render "contacts/contacts", :object => @opportunity
 
