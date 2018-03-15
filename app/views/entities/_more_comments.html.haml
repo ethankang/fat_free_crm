@@ -1,5 +1,5 @@
-- comments = entity_model.comments.order('id desc').to_a
-- last_comment = comments.shift
+- comments = entity_model.comments
+- last_comment = comments.first
 %ul.tools
   %li=link_to("更多备注","javascript:volid(0)",id:entity_model.id,:onclick => "read_more(this)") if comments.present?
 %fieldset.last_comment
@@ -10,7 +10,7 @@
   - comments.each do |comment|
     %dt.comment.highlight
       .body
-        = link_to avatar_for(comment.user, :size => :small), user_path(comment.user)
+        -# = link_to avatar_for(comment.user, :size => :small), user_path(comment.user)
         = link_to(comment.user.full_name, user_path(comment.user)) + ","
         %tt
           = t(:added_note, value: timeago(comment.created_at) ).html_safe

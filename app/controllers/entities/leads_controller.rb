@@ -194,6 +194,14 @@ class LeadsController < EntitiesController
     end
   end
 
+  protected
+
+  #----------------------------------------------------------------------------
+  def entities
+    (instance_variable_get("@#{controller_name}") || klass.my).
+      includes(:assignee, comments: :user)
+  end
+
   private
 
   #----------------------------------------------------------------------------

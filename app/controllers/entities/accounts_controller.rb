@@ -9,7 +9,60 @@ class AccountsController < EntitiesController
   # GET /accounts
   #----------------------------------------------------------------------------
   def index
-    @accounts = get_accounts(page: params[:page], per_page: params[:per_page])
+    # 将get_accounts即get_list_of_records暂时移动过来，简单修改看是否在查询速度上有大的提升
+    # get_accounts begin
+    options = {page: params[:page], per_page: params[:per_page]}
+    options[:query]  ||= params[:query]                        if params[:query]
+    self.current_page  = options[:page]                        if options[:page]
+    query, tags        = parse_query_and_tags(options[:query])
+    self.current_query = query
+    advanced_search = params[:q].present?
+    wants = request.format
+
+    scope = entities.merge(ransack_search.result(distinct: true))
+
+    # Get filter from session, unless running an advanced search
+    unless advanced_search
+      filter = session[:"#{controller_name}_filter"].to_s.split(',')
+      scope = scope.state(filter) if filter.present?
+    end
+
+    scope = scope.text_search(query)              if query.present?
+    scope = scope.tagged_with(tags, on: :tags) if tags.present?
+
+    # Ignore this order when doing advanced search
+    unless advanced_search
+      order = current_user.pref[:"#{controller_name}_sort_by"] || klass.sort_by
+      scope = scope.order(order)
+    end
+
+    @search_results_count = scope.count
+
+    # 计算应该有未完成的任务的,但是却没有未完成任务accounts
+    @requared_tasks_count = scope.requared_tasks_no_task.length
+
+    #include 所有的关联的contacts, task, opportunities, comments和user
+    scope = scope.includes(
+      :contacts, :tasks,
+      opportunities: :user,
+      comments: :user
+    )
+
+    # Pagination is disabled for xls and csv requests
+    unless wants.xls? || wants.csv?
+      per_page = if options[:per_page]
+                   options[:per_page] == 'all' ? @search_results_count : options[:per_page]
+                 else
+                   current_user.pref[:"#{controller_name}_per_page"]
+      end
+      scope = scope.paginate(page: current_page, per_page: per_page)
+    end
+
+    scope
+    ### get_accounts end
+
+    # @accounts = get_accounts(page: params[:page], per_page: params[:per_page])
+    @accounts = scope
 
     respond_with @accounts do |format|
       format.xls { render layout: 'header' }
@@ -29,7 +82,7 @@ class AccountsController < EntitiesController
 
     @accounts = entities.merge(ransack_search.result(distinct: true)). requared_tasks_no_task
     @search_results_count = @accounts.length
-
+    @requared_tasks_count = @accounts.requared_tasks_no_task.length
     @accounts = @accounts.paginate(page: current_page, per_page: per_page)
 
     render :index

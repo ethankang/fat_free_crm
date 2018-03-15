@@ -23,6 +23,7 @@ class Comment < ActiveRecord::Base
   belongs_to :user
   belongs_to :commentable, polymorphic: true
 
+  default_scope { order(created_at: :desc) }
   scope :created_by, ->(user) { where(user_id: user.id) }
   scope :text_search, ->(query) { search('comment_cont' => query).result }
 

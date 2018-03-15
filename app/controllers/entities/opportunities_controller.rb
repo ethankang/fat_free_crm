@@ -165,6 +165,14 @@ class OpportunitiesController < EntitiesController
     end
   end
 
+  protected
+
+  #----------------------------------------------------------------------------
+  def entities
+    (instance_variable_get("@#{controller_name}") || klass.my).
+      includes(:account, :user, comments: :user)
+  end
+
   private
 
   #----------------------------------------------------------------------------

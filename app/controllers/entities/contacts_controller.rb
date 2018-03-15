@@ -141,6 +141,14 @@ class ContactsController < EntitiesController
     end
   end
 
+  protected
+
+  #----------------------------------------------------------------------------
+  def entities
+    (instance_variable_get("@#{controller_name}") || klass.my).
+      includes(:lead, :account, comments: :user)
+  end
+
   private
 
   #----------------------------------------------------------------------------

@@ -5,11 +5,10 @@
 
 .remote#create_account{ hidden }
 
-- count = @accounts.requared_tasks_no_task.length
-- if count > 0
+- if @requared_tasks_count > 0
   %div.requared_tasks_no_task_shown
     %i.fa{class: "fa-warning"}
-    有#{count}名客户没有任务
+    有#{@requared_tasks_count}名客户没有任务
     = link_to '点击查看', tasks_required_accounts_path
 
 = render 'search'
