@@ -55,6 +55,12 @@ class AccountsController < EntitiesController
                  else
                    current_user.pref[:"#{controller_name}_per_page"]
       end
+
+      # 添加where(category: session[:accounts_filter].split(","))通过左侧公司类别来筛选
+      if session[:accounts_filter].present?
+        scope = scope.where(category: session[:accounts_filter].to_s.split(","))
+      end
+
       scope = scope.paginate(page: current_page, per_page: per_page)
     end
 
