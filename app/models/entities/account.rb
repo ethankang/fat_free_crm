@@ -63,7 +63,8 @@ class Account < ActiveRecord::Base
     joins("left join tasks ON tasks.asset_id = accounts.id AND tasks.asset_type = 'Account'").
       where('accounts.category IN (?)', Setting[:tasks_required_category]).
       group('accounts.id').
-      having('count(tasks.id) = 0 OR count(accounts.id) = count(tasks.completed_at)')
+      having('count(tasks.id) = 0 OR count(accounts.id) = count(tasks.completed_at)').
+      order('accounts.created_at DESC')
   }
 
   uses_user_permissions
