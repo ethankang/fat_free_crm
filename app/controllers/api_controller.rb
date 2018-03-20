@@ -13,6 +13,9 @@ class ApiController < ActionController::Base
         comment: "重复提交：#{params[:name]}-#{params[:phone]}-#{params[:company]}",
         user_id: user_id
       )
+
+      # 该lead发送重复提交消息
+      lead.send_resubmited_msg
     else
       lead = Lead.new(
         user_id: user_id,

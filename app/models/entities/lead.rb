@@ -176,6 +176,21 @@ class Lead < ActiveRecord::Base
   end
   alias_method :name, :full_name
 
+  # 该lead重复提交时发送消息
+  def send_resubmited_msg
+    dingid =
+      if assignee && assignee.dingid
+        assignee.dingid
+      else
+        User.where(id: USERIDS_FOR_DINGTALK_MSG).where.not(dingid: nil).pluck(:dingid)
+      end
+
+    send_dingtalk_msg(
+      :dingtalk_lead_resubmit_msg,
+      dingid
+    )
+  end
+
   private
 
   #----------------------------------------------------------------------------
