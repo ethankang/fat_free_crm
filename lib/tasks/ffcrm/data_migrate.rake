@@ -15,5 +15,14 @@ namespace :ffcrm do
       end
       p "完成!"
     end
+
+    desc "把某个销售，线索下的备注转移至account客户下"
+    task :move_comments_from_lead_to_account do
+      user = User.find 20
+      Lead.where(assigned_to: user.id, status: "converted").each do |l|
+        a = l.contact.account
+        l.comments.where(user_id: user.id).each {|c| c.update commentable: a}
+      end
+    end
   end
 end
