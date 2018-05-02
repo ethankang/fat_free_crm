@@ -326,20 +326,20 @@ campaign_status_color:
 #------------------------------------------------------------------------------
 lead_status:
   - :new
-  - :contacted
+  # - :contacted
   - :converted
   - :duplicated
   - :contact_later
-  - :abeyance
+  # - :abeyance
   - :rejected
 
 lead_status_color:
   :new       : Turquoise
-  :contacted : Lime
+  # :contacted : Lime
   :converted : YellowGreen
   :contact_later : Yellow
   :duplicated : LightGrey
-  :abeyance : Gainsboro
+  # :abeyance : Gainsboro
   :rejected  : LightGrey
 
 lead_source:
