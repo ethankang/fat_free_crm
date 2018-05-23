@@ -330,7 +330,7 @@ lead_status:
   - :converted
   - :duplicated
   - :contact_later
-  # - :abeyance
+  - :abeyance
   - :rejected
 
 lead_status_color:
@@ -339,7 +339,7 @@ lead_status_color:
   :converted : YellowGreen
   :contact_later : Yellow
   :duplicated : LightGrey
-  # :abeyance : Gainsboro
+  :abeyance : Tan
   :rejected  : LightGrey
 
 lead_source:
